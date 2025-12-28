@@ -92,14 +92,6 @@ export default function Certifications() {
       {/* Carousel */}
       {/* Carousel */}
 <div className="relative w-full flex items-center">
-  {/* Left Arrow */}
-  <button
-    onClick={() => scroll(-1)}
-    className="absolute left-10 z-10 text-[#C2A878] text-5xl font-bold hover:scale-110 transition"
-  >
-    ‹
-  </button>
-
   {/* Scroll Container */}
   <div
     ref={carouselRef}
@@ -118,15 +110,13 @@ export default function Certifications() {
     ))}
   </div>
 
-  {/* Right Arrow */}
-  <button
-    onClick={() => scroll(1)}
-    className="absolute right-10 z-10 text-[#C2A878] text-5xl font-bold hover:scale-110 transition"
-  >
-    ›
-  </button>
+  
+  {/* SCROLL HINT */}
+        
 </div>
-
+<p className="text-center text-sm text-[#C2A878]/60 mt-4">
+          Scroll →
+        </p>
     </section>
   );
 }

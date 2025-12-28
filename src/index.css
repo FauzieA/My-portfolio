@@ -91,26 +91,15 @@
 
 body {
   font-family: 'Inter', sans-serif;  /* Global default */
-  cursor: none;
+  /* ensure cursor is visible everywhere */
+  cursor: default;
 }
 
 h1, h2, h3, h4 {
   font-family: 'Playfair Display', serif;
 }
-@media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
 
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  label {
-    cursor: none !important;
-  }
-}
+
 
 a:hover,
 button:hover,

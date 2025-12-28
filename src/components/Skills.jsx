@@ -35,7 +35,7 @@ const skills = [
   { name: "VS Code", icon: FaReact },
   { name: "Postman", icon: SiPostman },
   { name: "Figma", icon: FaFigma },
-  { name: "Communication", icon: ChatBubbleBottomCenterTextIcon },
+  { name: "Elucidation", icon: ChatBubbleBottomCenterTextIcon },
   { name: "Teamwork", icon: UsersIcon },
   { name: "Teaching", icon: AcademicCapIcon },
   { name: "Analytical Thinking", icon: ChartBarIcon },
@@ -53,7 +53,7 @@ export default function Skills() {
           SKILLS
         </p>
         <h2 className="text-4xl sm:text-5xl font-bold text-[#E8EAEF]">
-          What I Bring to the Table
+          Core Competencies
         </h2>
       </div>
 

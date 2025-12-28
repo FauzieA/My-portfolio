@@ -73,27 +73,21 @@ const About = () => {
             className="text-lg leading-relaxed mb-6"
             style={{ color: "#C9CCD3" }}
           >
-            I’m Fauziyya A. Ahmed, a detail-oriented and adaptable Computer
-            Science student passionate about bridging software engineering and
-            research. I have hands-on experience in web development, e-commerce
-            platforms, and machine learning.
+           I’m Fauziyya Abdullahi Ahmed, a Computer Science student who enjoys exploring how different areas of technology connect. I like understanding how things work, from building interactive web experiences to experimenting with data and machine learning, and using that understanding to create solutions that actually make sense.
           </p>
 
           <p
             className="text-lg leading-relaxed mb-6"
             style={{ color: "#C9CCD3" }}
           >
-            Beyond coding, I co-founded TechNexus, a global initiative
-            empowering students with practical tech skills through workshops and
-            bootcamps. I enjoy collaborating with teams, teaching others, and
-            translating complex data into actionable insights.
+            Because I’m a curious person, I’ve dabbled across many fields, but my main focus has been web development, data-driven projects, and applied machine learning. I’m comfortable moving between code, logic, and design, and I enjoy the process as much as the result, breaking problems down, testing ideas, and refining details until everything clicks.
           </p>
 
           <p className="text-lg leading-relaxed" style={{ color: "#C9CCD3" }}>
-            I’m always exploring new technologies and challenges—whether it’s
-            building responsive websites, applying ML models to real-world
-            problems, or designing platforms that make an impact.
+            Beyond individual projects, I co-founded TechNexus, a global student-led initiative focused on helping university students, and anyone interested, build practical technical skills. Teaching, collaborating, and building alongside others has shaped how I see technology, and I’m drawn to spaces where curiosity is encouraged, ideas evolve, and building things actually makes a difference.
           </p>
+
+         
         </div>
       </div>
     </section>

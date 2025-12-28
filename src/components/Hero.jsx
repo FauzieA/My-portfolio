@@ -82,15 +82,15 @@ export default function Hero() {
 <div className="cursor-hover absolute bottom-10 w-full flex justify-center gap-16 z-20">
   <FloatingStar
     icon="github"
-    url="https://github.com/yourusername"
+    url="https://github.com/FauzieA"
   />
   <FloatingStar
     icon="linkedin"
-    url="https://linkedin.com/in/yourprofile"
+    url="https://www.linkedin.com/in/fauziyya-ahmed/"
   />
   <FloatingStar
     icon="mail"
-    url="mailto:your@email.com"
+    url="mailto:fauxieahmed22@gmail.com"
   />
 </div>
 

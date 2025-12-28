@@ -7,13 +7,12 @@ import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Certifications from "./components/Certifications";
 import Experience from "./components/Experience";
-import QuillCursor from "./components/QuillCursor";
 import ProjectDetails from "./components/ProjectDetails";
 
 function App() {
   return (
     <Router>
-      <QuillCursor />
+ 
 
       <Routes>
         {/* Main homepage with all sections */}
