@@ -5,15 +5,14 @@ export default function LoadingScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // We use a functional update to ensure we always have the latest 'prev' value
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
           return 100;
         }
-        // Increment by a fixed amount to avoid logic errors
-        const increment = Math.floor(Math.random() * 10) + 5;
+        // Steady increments for a smooth experience
+        const increment = Math.floor(Math.random() * 8) + 4;
         return Math.min(prev + increment, 100);
       });
     }, 150);
@@ -21,12 +20,11 @@ export default function LoadingScreen({ onComplete }) {
     return () => clearInterval(timer);
   }, []);
 
-  // Listen for the moment progress hits 100
   useEffect(() => {
     if (progress === 100) {
       const timeout = setTimeout(() => {
         onComplete();
-      }, 600); // Give the user a moment to see 100%
+      }, 500);
       return () => clearTimeout(timeout);
     }
   }, [progress, onComplete]);
@@ -35,24 +33,57 @@ export default function LoadingScreen({ onComplete }) {
     <motion.div
       className="fixed inset-0 z-[9999] bg-[#07131d] flex flex-col items-center justify-center font-mono text-[#C2A878]"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      exit={{ opacity: 0, transition: { duration: 0.6 } }}
     >
-      <div className="relative z-10 text-center">
-        <div className="text-6xl md:text-8xl font-bold mb-4 flex items-baseline justify-center">
-          {progress}<span className="text-2xl opacity-40 ml-2">%</span>
+      {/* Background Subtle Grid - Matches Hero */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(#C2A878 1px, transparent 1px)",
+            backgroundSize: "40px 40px"
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center">
+        
+        {/* --- THE DIAMOND NODE --- */}
+        <div className="relative w-20 h-20 mb-10">
+          {/* Animated Diamond Frame */}
+          <motion.div 
+            className="absolute inset-0 border-2 border-[#C2A878] rotate-45"
+            animate={{ 
+              scale: [1, 1.1, 1], 
+              opacity: [0.4, 1, 0.4],
+              boxShadow: ["0 0 0px #C2A878", "0 0 20px #C2A878", "0 0 0px #C2A878"] 
+            }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          {/* Percentage Counter */}
+          <div className="absolute inset-0 flex items-center justify-center font-bold text-xl tracking-tighter">
+            {progress}%
+          </div>
         </div>
 
-        <div className="w-64 h-[2px] bg-white/5 overflow-hidden mx-auto mb-6 relative">
+        {/* --- MINIMAL PROGRESS LINE --- */}
+        <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden mb-6">
           <motion.div
-            className="h-full bg-[#C2A878] shadow-[0_0_15px_#C2A878]"
+            className="absolute top-0 left-0 h-full bg-[#C2A878]"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
           />
         </div>
 
-        <div className="text-[10px] uppercase tracking-[0.3em] opacity-60">
-           {progress < 100 ? "// Loading Resources" : "// Environment Ready"}
+        {/* --- STATUS TEXT --- */}
+        <div className="text-[10px] uppercase tracking-[0.5em] text-[#C2A878] opacity-80 animate-pulse">
+           {progress < 100 ? "Initializing" : "Ready"}
         </div>
+      </div>
+
+      {/* --- FOOTER NAME --- */}
+      <div className="absolute bottom-10 text-[9px] uppercase tracking-[0.6em] opacity-30">
+        Fauziyya Abdullahi Ahmed
       </div>
     </motion.div>
   );

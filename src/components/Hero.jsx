@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowRight } from "react-icons/fa"; 
+import { useNavigate, useLocation } from "react-router-dom"; // Add these
 import HeroTitles from "./HeroTitles"; 
 import FloatingShapes from "../components/FloatingShapes"; 
 
@@ -18,6 +19,23 @@ const SocialLink = ({ href, Icon }) => {
 };
 
 export default function Hero() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Unified scroll handler
+  const scrollToSection = (id) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="hero" className="relative w-full min-h-screen flex items-center px-6 md:px-14 lg:px-24 bg-[#07131d] overflow-hidden">
       
@@ -67,7 +85,7 @@ export default function Hero() {
             Fauziyya A. Ahmed<span className="text-[#C2A878]">.</span>
           </motion.h1>
 
-          {/* Titles - UPDATED with flex-wrap and gap to prevent stacking */}
+          {/* Titles */}
           <motion.div
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8892b0] mb-8 flex flex-wrap items-center gap-x-3 gap-y-2"
@@ -88,19 +106,19 @@ export default function Hero() {
           {/* Buttons & Socials */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
             <div className="flex gap-4">
-              <a
-                href="#projects"
+              <button
+                onClick={() => scrollToSection("projects")}
                 className="group px-8 py-4 bg-[#C2A878] text-[#07131d] font-bold font-mono text-sm uppercase tracking-widest hover:bg-white transition-colors"
               >
                 View Work
-              </a>
-              <a
-                href="#contact"
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
                 className="group px-8 py-4 border border-white/20 text-[#C2A878] font-bold font-mono text-sm uppercase tracking-widest hover:border-[#C2A878] hover:bg-[#C2A878]/5 transition-colors flex items-center gap-2"
               >
                 Contact
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
-              </a>
+              </button>
             </div>
 
             <div className="flex gap-2">
