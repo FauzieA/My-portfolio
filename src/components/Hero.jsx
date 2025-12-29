@@ -4,7 +4,6 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaArrowRight } from "react-icons/fa";
 import HeroTitles from "./HeroTitles"; 
 import FloatingShapes from "../components/FloatingShapes"; 
 
-// A sharp, technical social link
 const SocialLink = ({ href, Icon }) => {
   return (
     <a 
@@ -22,7 +21,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative w-full min-h-screen flex items-center px-6 md:px-14 lg:px-24 bg-[#07131d] overflow-hidden">
       
-      {/* --- 1. TECHNICAL GRID BACKGROUND --- */}
+      {/* --- TECHNICAL GRID BACKGROUND --- */}
       <div className="absolute inset-0 flex justify-between pointer-events-none opacity-10">
         <div className="w-[1px] h-full bg-white"></div>
         <div className="w-[1px] h-full bg-white hidden md:block"></div>
@@ -40,15 +39,14 @@ export default function Hero() {
       
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#07131d] to-transparent z-10" />
 
-
       <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        {/* --- LEFT COLUMN: CONTENT (Spans 7) --- */}
+        {/* --- LEFT COLUMN: CONTENT --- */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
-          className="lg:col-span-7 flex flex-col justify-center"
+          className="lg:col-span-7 flex flex-col justify-center pt-32 md:pt-40 lg:pt-0"
         >
           {/* Eyebrow */}
           <motion.div 
@@ -77,7 +75,7 @@ export default function Hero() {
             I am a <span className="text-[#C2A878]"><HeroTitles /></span>
           </motion.div>
 
-          {/* Bio - UPDATED TO REFLECT DS > WEB > IOT */}
+          {/* Bio */}
           <motion.p 
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
             className="max-w-xl text-[#C9CCD3] text-lg leading-relaxed mb-10 border-l-2 border-white/10 pl-6"
@@ -87,10 +85,7 @@ export default function Hero() {
           </motion.p>
 
           {/* Buttons & Socials */}
-          <motion.div 
-            variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-8"
-          >
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
             <div className="flex gap-4">
               <a
                 href="#projects"
@@ -112,8 +107,7 @@ export default function Hero() {
               <SocialLink href="https://www.linkedin.com/in/fauziyya-ahmed/" Icon={FaLinkedin} />
               <SocialLink href="mailto:fauxieahmed22@gmail.com" Icon={FaEnvelope} />
             </div>
-
-          </motion.div>
+          </div>
         </motion.div>
 
 
@@ -125,24 +119,20 @@ export default function Hero() {
           className="lg:col-span-5 flex justify-center lg:justify-end relative pointer-events-none select-none"
         >
           <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
-            {/* Frame Brackets */}
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#C2A878]"></div>
             <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#C2A878]"></div>
             <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#C2A878]"></div>
             <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#C2A878]"></div>
 
-            {/* Inner Grid */}
             <div className="absolute inset-4 border border-white/5 bg-[#0d1b27]/50 backdrop-blur-sm">
                 <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/10"></div>
                 <div className="absolute left-1/2 top-0 h-full w-[1px] bg-white/10"></div>
             </div>
 
-            {/* Shapes */}
             <div className="absolute inset-0 overflow-hidden">
                <FloatingShapes />
             </div>
 
-            {/* Scan Line */}
             <motion.div 
                 animate={{ top: ["0%", "100%", "0%"] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "linear" }}

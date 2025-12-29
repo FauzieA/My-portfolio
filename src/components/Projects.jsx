@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard.jsx";
 import FloatingShapes from "../components/FloatingShapes";
-import { projects } from "../data/Projects"; // Ensure this path is correct
+import { projects } from "../data/Projects"; 
 
 const CATEGORIES = ["All", "Data Science", "Web Dev", "IoT & Robotics"];
 
@@ -19,7 +19,6 @@ export default function Projects() {
       id="projects"
       className="w-full py-24 relative overflow-hidden bg-[#07131d]"
     >
-      {/* --- BACKGROUND GRID (Matches Hero) --- */}
       <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5">
         <div className="w-[1px] h-full bg-white"></div>
         <div className="w-[1px] h-full bg-white hidden md:block"></div>
@@ -29,16 +28,13 @@ export default function Projects() {
 
       <FloatingShapes />
 
-      {/* --- HEADER --- */}
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 mb-16">
-        
-        {/* Title Block */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 border-b border-white/10 pb-8">
           <div>
             <div className="flex items-center gap-4 mb-4">
               <span className="h-[2px] w-12 bg-[#C2A878]"></span>
               <span className="text-[#C2A878] font-mono text-sm tracking-widest uppercase">
-                Selected Works
+                // Portfolio
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-[#E8EAEF] tracking-tight">
@@ -46,7 +42,6 @@ export default function Projects() {
             </h2>
           </div>
 
-          {/* --- TECH FILTERS (Terminal Style) --- */}
           <div className="flex flex-wrap gap-6">
             {CATEGORIES.map((cat) => (
               <button
@@ -61,12 +56,10 @@ export default function Projects() {
                   }
                 `}
               >
-                {/* The text */}
                 <span className="relative z-10">
                    {activeCategory === cat ? `> ${cat}` : cat}
                 </span>
 
-                {/* The Active Line */}
                 {activeCategory === cat && (
                   <motion.div 
                     layoutId="activeTab"
@@ -77,10 +70,8 @@ export default function Projects() {
             ))}
           </div>
         </div>
-
       </div>
 
-      {/* --- PROJECTS GRID --- */}
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
           <AnimatePresence mode="popLayout">
@@ -100,7 +91,6 @@ export default function Projects() {
           </AnimatePresence>
         </div>
 
-        {/* Empty State */}
         {filteredProjects.length === 0 && (
           <div className="text-center text-[#C9CCD3] mt-20 font-mono border border-dashed border-white/10 p-12">
             <p className="text-xl opacity-50"> // No projects found in this sector</p>

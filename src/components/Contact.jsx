@@ -103,14 +103,16 @@ export default function Contact() {
             </div>
 
             {/* Location */}
-            <div className="group">
-              <label className="block text-xs font-mono text-[#C2A878] uppercase tracking-widest mb-2 opacity-80">
-                // Location
-              </label>
-              <div className="flex items-center gap-4 text-xl text-[#E8EAEF]">
-                <FaMapMarkerAlt /> Kedah, Malaysia
-              </div>
-            </div>
+           {/* Location - Updated for Mobility */}
+<div className="group">
+  <label className="block text-xs font-mono text-[#C2A878] uppercase tracking-widest mb-2 opacity-80">
+    // Mobility
+  </label>
+  <div className="flex items-center gap-4 text-xl text-[#E8EAEF]">
+    <FaMapMarkerAlt className="text-[#C2A878]" /> 
+    <span>Open to Relocation / Remote</span>
+  </div>
+</div>
 
             {/* Socials */}
             <div>
