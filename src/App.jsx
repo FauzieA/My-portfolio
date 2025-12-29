@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import { AnimatePresence } from "framer-motion"; // Import this!
+import { AnimatePresence } from "framer-motion";
 
-// Components
+// Section Components
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
-import Contact from "./components/Contact";
 import Certifications from "./components/Certifications";
 import Experience from "./components/Experience";
+import Contact from "./components/Contact";
+
+// Page Components
 import ProjectDetails from "./components/ProjectDetails";
-import LoadingScreen from "./components/LoadingScreen"; // Import the loader
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,31 +24,39 @@ function App() {
       {/* 1. THE LOADING SCREEN */}
       <AnimatePresence mode="wait">
         {isLoading && (
-          <LoadingScreen onComplete={() => setIsLoading(false)} />
+          <LoadingScreen 
+            key="loader" 
+            onComplete={() => setIsLoading(false)} 
+          />
         )}
       </AnimatePresence>
 
-      {/* 2. THE MAIN APP (Only visible after loading starts fading) */}
+      {/* 2. THE MAIN APP */}
+      {/* We only render the Router after loading to ensure smooth entry animations */}
       {!isLoading && (
         <Router>
-          <Navbar />
-
           <Routes>
+            {/* MAIN HOME ROUTE */}
             <Route
               path="/"
               element={
                 <>
-                  <section id="hero"><Hero /></section>
-                  <section id="about"><About /></section>
-                  <section id="projects"><Projects /></section>
-                  <section id="skills"><Skills /></section>
-                  <section id="certifications"><Certifications /></section>
-                  <section id="experience"><Experience /></section>
-                  <section id="contact"><Contact /></section>
+                  <Navbar />
+                  <main>
+                    <Hero />
+                    <About />
+                    <Projects />
+                    <Skills />
+                    <Certifications />
+                    <Experience />
+                    <Contact />
+                  </main>
                 </>
               }
             />
 
+            {/* PROJECT DETAIL ROUTE */}
+            {/* Note: Navbar is NOT included here to prevent overlap with the ProjectDetails nav */}
             <Route path="/projects/:projectId" element={<ProjectDetails />} />
           </Routes>
         </Router>

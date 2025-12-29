@@ -67,12 +67,13 @@ export default function Hero() {
             Fauziyya A. Ahmed<span className="text-[#C2A878]">.</span>
           </motion.h1>
 
-          {/* Titles */}
+          {/* Titles - UPDATED with flex-wrap and gap to prevent stacking */}
           <motion.div
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8892b0] mb-8 flex items-center gap-3"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#8892b0] mb-8 flex flex-wrap items-center gap-x-3 gap-y-2"
           >
-            I am a <span className="text-[#C2A878]"><HeroTitles /></span>
+            <span className="whitespace-nowrap">I am a</span>
+            <HeroTitles />
           </motion.div>
 
           {/* Bio */}
