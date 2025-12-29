@@ -1,123 +1,217 @@
-// src/components/Certifications.jsx
-import React, { useRef } from "react";
-import CertCard from "./CertCard";
+import React from "react";
+import { motion } from "framer-motion";
 import FloatingShapes from "../components/FloatingShapes";
 
-import pcepImg from "../assets/certs/pcep.png";
-import ibmDataImg from "../assets/certs/ibm-data.png";
-import ibmCloudImg from "../assets/certs/ibm-cloud.png";
-import kaggleSQLImg from "../assets/certs/kaggle-sql.png";
-import kaggleVisImg from "../assets/certs/kaggle-vis.png";
-import kaggleMLImg from "../assets/certs/kaggle-ml.png";
-import qubitAzureImg from "../assets/certs/qubit-azure.png";
-import cBeginnersImg from "../assets/certs/gla-c.png";
+// Icons - Safe imports
+import { 
+  FaTrophy, 
+  FaAward, 
+  FaMedal, 
+  FaCertificate, 
+  FaMicrosoft,
+  FaDatabase, 
+  FaChartPie, 
+  FaBrain     
+} from "react-icons/fa";
 
+import { 
+  SiPython 
+} from "react-icons/si";
 
+const awards = [
+  {
+    title: "Winner, Hult Prize (On-Campus)",
+    organization: "Hult Prize Foundation",
+    year: "2025",
+    description: "Secured 1st place for social entrepreneurship, leading a team to ideate scalable business solutions for global impact.",
+    icon: FaTrophy,
+    color: "#C2A878", 
+  },
+  {
+    title: "Best Paper Award",
+    organization: "Traffic Prediction Research",
+    year: "JUN 2025",
+    description: "Awarded for 'Predictive AI Models for Traffic Prediction', comparing Classical ML vs. Neural Networks.",
+    icon: FaAward,
+    color: "#C2A878",
+  },
+  {
+    title: "Best Project Award (Social Cluster)",
+    organization: "Albukhary International University",
+    year: "FEB 2024",
+    description: "Recognized for the most impactful project in the Sustainability and Society category.",
+    icon: FaMedal,
+    color: "#C9CCD3", 
+  },
+  {
+    title: "Grand Heritage Ambassador",
+    organization: "AIU Cultural Week",
+    year: "FEB 2025",
+    description: "Awarded for outstanding representation and community leadership.",
+    icon: FaAward,
+    color: "#C2A878",
+  },
+];
 
 const certifications = [
   {
     name: "PCEP: Certified Entry-Level Python Programmer",
-    img: pcepImg,
     issuer: "Python Institute",
-    description: "Verified foundational Python programming skills."
+    icon: SiPython,
+    color: "#3776AB",
+  },
+  {
+    name: "Advanced SQL",
+    issuer: "Kaggle",
+    icon: FaDatabase, 
+    color: "#20BEFF",
+  },
+  {
+    name: "Data Visualization",
+    issuer: "Kaggle",
+    icon: FaChartPie, 
+    color: "#20BEFF",
+  },
+  {
+    name: "Intro to Machine Learning",
+    issuer: "Kaggle",
+    icon: FaBrain, 
+    color: "#20BEFF",
   },
   {
     name: "IBM Data Fundamentals",
-    img: ibmDataImg,
     issuer: "IBM",
-    description: "Introduction to data concepts, databases, and analytics."
+    icon: FaCertificate, 
+    color: "#052FAD",
   },
   {
     name: "IBM Cloud Essentials",
-    img: ibmCloudImg,
     issuer: "IBM",
-    description: "Overview of core cloud concepts, services, and architecture."
+    icon: FaCertificate, 
+    color: "#052FAD",
   },
   {
-    name: "Kaggle: Advanced SQL",
-    img: kaggleSQLImg,
-    issuer: "Kaggle",
-    description: "Learned advanced SQL queries and database manipulation."
-  },
-  {
-    name: "Kaggle: Data Visualization",
-    img: kaggleVisImg,
-    issuer: "Kaggle",
-    description: "Built insightful visualizations from real-world datasets."
-  },
-  {
-    name: "Kaggle: Intro to Machine Learning",
-    img: kaggleMLImg,
-    issuer: "Kaggle",
-    description: "Applied basic ML algorithms to solve practical problems."
-  },
-  {
-    name: "Qubit x Microsoft Azure: Quantum Winter School",
-    img: qubitAzureImg,
-    issuer: "Qubit & Microsoft Azure",
-    description: "Hands-on introduction to quantum computing and Azure Quantum."
+    name: "Azure Quantum Winter School",
+    issuer: "Qubit x Microsoft",
+    icon: FaMicrosoft,
+    color: "#00A4EF",
   },
   {
     name: "C for Beginners",
-    img: cBeginnersImg,
     issuer: "Great Learning Academy",
-    description: "Basic C programming concepts and beginner-level exercises."
+    icon: FaCertificate,
+    color: "#E8EAEF",
   },
 ];
 
-
 export default function Certifications() {
-  const carouselRef = useRef(null);
-
-  const scroll = (direction) => {
-    if (carouselRef.current) {
-      const width = carouselRef.current.offsetWidth * 0.7; // scroll 70% of container width
-      carouselRef.current.scrollBy({ left: direction * width, behavior: "smooth" });
-    }
-  };
-
   return (
-    <section className="w-full py-20 bg-[#07131dff] flex flex-col items-center relative">
+    <section id="certifications" className="w-full py-24 bg-[#07131d] relative overflow-hidden flex flex-col items-center px-6">
+      
+      {/* --- BACKGROUND GRID --- */}
+      <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5">
+        <div className="w-[1px] h-full bg-white"></div>
+        <div className="w-[1px] h-full bg-white hidden md:block"></div>
+        <div className="w-[1px] h-full bg-white hidden lg:block"></div>
+        <div className="w-[1px] h-full bg-white"></div>
+      </div>
+
       <FloatingShapes />
-      {/* Header */}
-      <div className="text-center mb-12">
-        <p className="tracking-[0.25em] text-sm mb-2" style={{ color: "#C2A878" }}>
-          CERTIFICATIONS
-        </p>
-        <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: "#E8EAEF" }}>
-          My Achievements
+
+      {/* --- HEADER --- */}
+      <div className="relative z-10 text-center mb-20">
+        <div className="flex items-center justify-center gap-4 mb-4">
+          <span className="h-[1px] w-12 bg-[#C2A878]"></span>
+          <span className="text-[#C2A878] font-mono text-sm tracking-widest uppercase">
+            // Recognition Log
+          </span>
+          <span className="h-[1px] w-12 bg-[#C2A878]"></span>
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-bold text-[#E8EAEF] tracking-tight">
+          Achievements<span className="text-[#C2A878]">.</span>
         </h2>
       </div>
 
-      {/* Carousel */}
-      {/* Carousel */}
-<div className="relative w-full flex items-center">
-  {/* Scroll Container */}
-  <div
-    ref={carouselRef}
-    className="flex overflow-x-auto gap-6 snap-x snap-mandatory scrollbar-hide py-6 px-8"
-  >
-    {certifications.map((cert, i) => (
-      <div key={i} className="flex-shrink-0 w-80 sm:w-96 h-80 snap-center cursor-pointer">
-        <CertCard
-  name={cert.name}
-  img={cert.img}
-  issuer={cert.issuer}
-  description={cert.description}
-/>
- 
-      </div>
-    ))}
-  </div>
-
-  
-  {/* SCROLL HINT */}
+      <div className="relative z-10 max-w-[1400px] w-full grid grid-cols-1 lg:grid-cols-2 gap-16">
         
-</div>
-<p className="text-center text-sm text-[#C2A878]/60 mt-4">
-          Scroll →
-        </p>
+        {/* === LEFT COLUMN: AWARDS (System Logs) === */}
+        <div>
+          <h3 className="text-xl font-bold text-[#E8EAEF] mb-8 flex items-center gap-3 font-mono uppercase tracking-wider border-b border-white/10 pb-4">
+            <FaTrophy className="text-[#C2A878]" /> Honors & Awards
+          </h3>
+          
+          <div className="flex flex-col gap-4">
+            {awards.map((award, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative bg-[#0d1b27] border-l-2 border-[#C2A878] border-y border-r border-white/5 p-6 hover:bg-[#C2A878]/5 transition-colors"
+              >
+                 {/* Corner Accent */}
+                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#C2A878]/30 group-hover:border-[#C2A878] transition-colors"></div>
+
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="text-lg font-bold text-[#E8EAEF] group-hover:text-[#C2A878] transition-colors leading-tight">
+                    {award.title}
+                  </h4>
+                  <span className="text-xs font-mono text-[#C2A878] border border-[#C2A878]/30 px-2 py-1 bg-[#C2A878]/5">
+                    {award.year}
+                  </span>
+                </div>
+                <p className="text-xs text-[#C9CCD3] font-mono uppercase tracking-wide mb-3 opacity-60">
+                  // {award.organization}
+                </p>
+                <p className="text-sm text-[#C9CCD3] leading-relaxed border-l border-white/10 pl-3">
+                  {award.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+
+        {/* === RIGHT COLUMN: CERTIFICATIONS (File Directory) === */}
+        <div>
+          <h3 className="text-xl font-bold text-[#E8EAEF] mb-8 flex items-center gap-3 font-mono uppercase tracking-wider border-b border-white/10 pb-4">
+            <FaCertificate className="text-[#C2A878]" /> Credential Index
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {certifications.map((cert, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-4 bg-[#0d1b27] p-4 border border-white/5 hover:border-[#C2A878]/50 hover:bg-[#132636] transition-all group"
+              >
+                {/* Icon Container (Square) */}
+                <div 
+                  className="w-10 h-10 flex items-center justify-center bg-[#07131d] border border-white/10 shrink-0 group-hover:border-[#C2A878]/30 transition-colors"
+                  style={{ color: cert.color }}
+                >
+                  <cert.icon size={18} />
+                </div>
+                
+                {/* Text */}
+                <div className="overflow-hidden">
+                  <h4 className="text-xs font-bold text-[#E8EAEF] leading-tight mb-1 font-mono uppercase truncate">
+                    {cert.name}
+                  </h4>
+                  <p className="text-[10px] text-[#C9CCD3]/50 font-mono uppercase tracking-widest">
+                    ISSUED_BY: {cert.issuer}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+      </div>
     </section>
   );
 }
-

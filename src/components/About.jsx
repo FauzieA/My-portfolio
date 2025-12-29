@@ -1,97 +1,111 @@
 import React from "react";
+import { motion } from "framer-motion";
 import mainPic from "../assets/fauziyya.jpg";
-import FloatingShapes from "../components/FloatingShapes";
+import { FaDownload } from "react-icons/fa"; 
+import resumePdf from "../assets/resume.pdf";
 
-const About = () => {
+// --- STATS ---
+const stats = [
+  { label: "Global Certifications", value: "08+" }, 
+  { label: "Projects Completed", value: "15+" },
+  { label: "Core Stack", value: "Python & React" }, // Honest and specific
+];
+
+export default function About() {
   return (
-    <section
-      id="about"
-      className="w-full py-20 relative overflow-hidden px-4 md:px-8"
-      style={{ background: "#07131dff" }}
-    >
-      <FloatingShapes />
+    <section id="about" className="w-full min-h-screen bg-[#07131d] relative overflow-hidden flex items-center">
+      
+      {/* Background Subtle Elements */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C2A878]/5 skew-x-12 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#3776AB]/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* --- TOP GRADIENT BLEND --- */}
-      <div
-        className="absolute top-0 left-0 w-full h-[150px]"
-        style={{
-          background: "linear-gradient(to top, transparent 0%, #08131d 100%)",
-        }}
-      ></div>
-
-      {/* --- SECTION HEADER --- */}
-      <div className="text-center mb-16 mt-15">
-        <h2
-          className="tracking-[0.25em] text-xl mb-4"
-          style={{ color: "#C2A878" }}
-        >
-          ABOUT ME
-        </h2>
-
-        <h2
-          className="text-4xl sm:text-5xl font-bold"
-          style={{ color: "#E8EAEF" }}
-        >
-          Aspiring Data Scientist and Web Developer
-        </h2>
-      </div>
-
-      {/* --- CONTENT GRID --- */}
-      <div className="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center px-4 md:px-8">
-        {/* ==== LEFT: PORTRAIT ==== */}
-        <div className="relative flex justify-center">
-          {/* Bigger Glow */}
-          <div
-            className="absolute w-[480px] h-[480px] rounded-full blur-3xl opacity-40"
-            style={{
-              background: "radial-gradient(circle, #00c6ff55, #00101a00)",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          ></div>
-
-          {/* Blob + Border */}
-          <div
-            className="relative w-[430px] h-[440px] overflow-hidden rounded-[38%_62%_70%_45%/48%_40%_58%_52%]"
-            style={{
-              border: "1px solid #C2A87844",
-              boxShadow: "0 0 55px #00c6ff44",
-            }}
+      {/* --- MAIN GRID --- */}
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-center">
+        
+        {/* ==== LEFT COLUMN: TEXT ==== */}
+        <div className="lg:col-span-7 px-6 md:px-16 lg:pl-24 lg:pr-12 py-12 lg:py-24 relative z-10">
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
-            <img
-              src={mainPic}
-              alt="Portrait"
-              className="w-full h-full object-cover scale-110"
+            <div className="flex items-center gap-4 mb-6">
+              <span className="h-[2px] w-12 bg-[#C2A878]"></span>
+              <span className="text-[#C2A878] font-bold tracking-[0.2em] uppercase text-sm">
+                About Me
+              </span>
+            </div>
+
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#E8EAEF] leading-tight mb-8">
+              Building data-driven applications <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C2A878] to-[#FFF]">
+                with purpose.
+              </span>
+            </h2>
+
+            <div className="text-lg text-[#C9CCD3] leading-relaxed space-y-6 max-w-2xl">
+              <p>
+                I am <strong className="text-white">Fauziyya Abdullahi Ahmed</strong>, a Computer Science senior with a dual focus on 
+                <span className="text-[#C2A878]"> Data Science</span> and <span className="text-[#C2A878]"> Web Development</span>.
+                I don't just build models in a notebook; I build the applications that make those insights accessible.
+              </p>
+              <p>
+                My workflow is Python-centric: extracting insights with <span className="text-white font-bold">Pandas</span>, architecting robust backends with <span className="text-white font-bold">Django</span>, and creating interactive frontends with <span className="text-white font-bold">React</span>.
+              </p>
+              <p>
+                Whether it's predicting traffic patterns or optimizing educational platforms, I aim to bridge the gap between complex algorithms and intuitive user experiences.
+              </p>
+            </div>
+
+            {/* --- STATS ROW --- */}
+            <div className="grid grid-cols-3 gap-6 mt-12 border-t border-white/10 pt-8 max-w-2xl">
+              {stats.map((stat, index) => (
+                <div key={index}>
+                  <h4 className="text-2xl md:text-3xl font-bold text-[#E8EAEF]">{stat.value}</h4>
+                  <p className="text-xs md:text-sm text-[#C9CCD3]/60 uppercase tracking-wider mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* --- SINGLE ACTION BUTTON --- */}
+            <div className="mt-12">
+              <a
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex px-8 py-4 bg-[#C2A878] text-[#07131d] font-bold text-sm uppercase tracking-wide rounded-none items-center gap-3 hover:bg-[#d4b985] transition-all shadow-[0_0_20px_rgba(194,168,120,0.2)]"
+              >
+                Download Resume 
+                <FaDownload className="group-hover:translate-y-1 transition-transform" />
+              </a>
+            </div>
+
+          </motion.div>
+        </div>
+
+        {/* ==== RIGHT COLUMN: IMAGE ==== */}
+        <div className="lg:col-span-5 relative h-full min-h-[500px] lg:min-h-screen w-full">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <img 
+              src={mainPic} 
+              alt="Fauziyya Profile" 
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 ease-out"
             />
-          </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#07131d] via-[#07131d]/20 to-transparent lg:w-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#07131d] to-transparent lg:hidden"></div>
+            <div className="absolute top-10 right-10 w-full h-full border-r border-t border-[#C2A878]/30 hidden lg:block translate-x-4 -translate-y-4"></div>
+          </motion.div>
         </div>
 
-        {/* ==== RIGHT: TEXT ==== */}
-        <div className="max-w-xl text-justify">
-          <p
-            className="text-lg leading-relaxed mb-6"
-            style={{ color: "#C9CCD3" }}
-          >
-           I’m Fauziyya Abdullahi Ahmed, a Computer Science student who enjoys exploring how different areas of technology connect. I like understanding how things work, from building interactive web experiences to experimenting with data and machine learning, and using that understanding to create solutions that actually make sense.
-          </p>
-
-          <p
-            className="text-lg leading-relaxed mb-6"
-            style={{ color: "#C9CCD3" }}
-          >
-            Because I’m a curious person, I’ve dabbled across many fields, but my main focus has been web development, data-driven projects, and applied machine learning. I’m comfortable moving between code, logic, and design, and I enjoy the process as much as the result, breaking problems down, testing ideas, and refining details until everything clicks.
-          </p>
-
-          <p className="text-lg leading-relaxed" style={{ color: "#C9CCD3" }}>
-            Beyond individual projects, I co-founded TechNexus, a global student-led initiative focused on helping university students, and anyone interested, build practical technical skills. Teaching, collaborating, and building alongside others has shaped how I see technology, and I’m drawn to spaces where curiosity is encouraged, ideas evolve, and building things actually makes a difference.
-          </p>
-
-         
-        </div>
       </div>
     </section>
   );
-};
-
-export default About;
+}

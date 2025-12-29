@@ -1,87 +1,136 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { FaArrowRight, FaCode } from "react-icons/fa";
 
-const ProjectCard = ({ project, isDragging }) => {
+const ProjectCard = ({ project }) => {
   const cardRef = useRef(null);
   const [flipped, setFlipped] = useState(false);
 
+  // --- 3D TILT EFFECT ---
   const handleMouseMove = (e) => {
-    if (flipped || isDragging) return;
+    if (flipped) return;
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const rotateX = ((y - rect.height / 2) / 20) * -1;
-    const rotateY = (x - rect.width / 2) / 20;
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    const rotateX = ((y - rect.height / 2) / 30) * -1; // Reduced sensitivity
+    const rotateY = (x - rect.width / 2) / 30;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   };
 
   const resetTilt = () => {
-    if (flipped || isDragging) return;
-    cardRef.current.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
-  };
-
-  const handleClick = () => {
-    if (!isDragging) setFlipped(!flipped);
+    if (flipped) return;
+    cardRef.current.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
   };
 
   return (
-    <motion.div
-      className="relative min-w-[550px] md:min-w-[460px] cursor-pointer"
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 160, damping: 18 }}
-      onClick={handleClick}
-      animate={{ y: flipped ? -12 : 0 }}
+    <div 
+      className="relative w-full h-[450px] cursor-pointer group perspective-1000"
+      onClick={() => setFlipped(!flipped)}
+      style={{ zIndex: flipped ? 50 : 1 }}
     >
       <motion.div
         ref={cardRef}
+        className="w-full h-full relative preserve-3d transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+        animate={{ rotateY: flipped ? 180 : 0 }}
         onMouseMove={handleMouseMove}
         onMouseLeave={resetTilt}
-        className="relative w-full h-[380px] rounded-2xl"
         style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ type: "spring", stiffness: 180, damping: 15 }}
       >
-        {/* FRONT */}
-        <div className="absolute inset-0 rounded-2xl overflow-hidden bg-[#0d1b26]" style={{ backfaceVisibility: "hidden" }}>
-          <img
-            src={project.cardImage}
-            className="w-full h-56 object-cover rounded-xl shadow-lg"
-            draggable={false}
-          />
-          <div className="p-5">
-            <p className="text-xs tracking-widest mb-2" style={{ color: "#C2A878" }}>
-              {project.tag}
-            </p>
-            <h3 className="text-xl font-bold mb-2" style={{ color: "#E8EAEF" }}>
-              {project.title}
-            </h3>
+        {/* --- FRONT SIDE (The Dashboard View) --- */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-[#0d1b27] border border-white/5 overflow-hidden backface-hidden shadow-2xl"
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
+          {/* Image */}
+          <div className="h-[60%] w-full overflow-hidden relative">
+             <div className="absolute inset-0 bg-[#0d1b27]/20 group-hover:bg-transparent transition-colors z-10" />
+             <div className="w-full h-full bg-[#1a2c3d]">
+                <img
+                  src={project.cardImage}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+            </div>
+            
+            {/* Tag Overlay */}
+            <div className="absolute top-4 left-4 z-20">
+               <span className="px-3 py-1 bg-[#07131d]/90 border border-[#C2A878]/30 text-[#C2A878] text-[10px] font-mono uppercase tracking-wider backdrop-blur-md">
+                 {project.category}
+               </span>
+            </div>
+          </div>
+
+          {/* Text Content */}
+          <div className="h-[40%] p-6 flex flex-col justify-between bg-[#0d1b27] relative">
+            {/* Top Border Line */}
+            <div className="absolute top-0 left-6 right-6 h-[1px] bg-white/10" />
+
+            <div>
+               <h3 className="text-xl font-bold text-[#E8EAEF] leading-tight mb-2 group-hover:text-[#C2A878] transition-colors">
+                 {project.title}
+               </h3>
+               <p className="text-sm text-[#C9CCD3]/60 font-mono">
+                 // {project.tag}
+               </p>
+            </div>
+
+            <div className="flex items-center justify-between mt-4">
+               <div className="text-xs text-[#C9CCD3]/40 font-mono uppercase tracking-widest">
+                  System Status: Online
+               </div>
+               <span className="text-[#C2A878] text-xs font-bold font-mono group-hover:translate-x-1 transition-transform">
+                 [ View Specs ]
+               </span>
+            </div>
           </div>
         </div>
 
-        {/* BACK */}
-        <div className="absolute inset-0 rounded-2xl overflow-hidden bg-[#0d1b26] p-5 flex flex-col justify-between" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
-          <div>
-            <p className="text-xs tracking-widest mb-2" style={{ color: "#C2A878" }}>
-              {project.tag}
-            </p>
-            <h3 className="text-xl font-bold mb-3" style={{ color: "#E8EAEF" }}>
+
+        {/* --- BACK SIDE (The Blueprint Spec Sheet) --- */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-[#132636] border border-white/10 p-8 flex flex-col justify-between backface-hidden shadow-2xl"
+          style={{ 
+            backfaceVisibility: "hidden", 
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg)" 
+          }}
+        >
+          {/* Decorative Corner Brackets (The "Tech" Look) */}
+          <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-[#C2A878]/50" />
+          <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-[#C2A878]/50" />
+          <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-[#C2A878]/50" />
+          <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-[#C2A878]/50" />
+
+          {/* Content */}
+          <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-6 opacity-50">
+               <FaCode className="text-[#C2A878]" />
+               <span className="text-xs font-mono text-[#C2A878] uppercase tracking-widest">
+                 Technical Brief
+               </span>
+            </div>
+
+            <h3 className="text-2xl font-bold text-white mb-4">
               {project.title}
             </h3>
-            <p className="text-sm leading-relaxed" style={{ color: "#C9CCD3" }}>
+            
+            <p className="text-sm text-[#C9CCD3] leading-relaxed border-l-2 border-[#C2A878]/30 pl-4">
               {project.description}
             </p>
           </div>
-          <Link to={`/projects/${project.id}`} className="text-[#C2A878] hover:underline">
-            See More →
+
+          <Link
+            to={`/projects/${project.id}`}
+            onClick={(e) => e.stopPropagation()} 
+            className="relative z-10 w-full py-4 bg-[#C2A878] text-[#07131d] font-bold font-mono text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-white transition-colors"
+          >
+            Access Data <FaArrowRight />
           </Link>
         </div>
-
-        {/* SOFT GLOW */}
-        <div className="absolute inset-0 blur-3xl opacity-25 -z-10" style={{ background: "radial-gradient(circle, #C2A87833, transparent)" }} />
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

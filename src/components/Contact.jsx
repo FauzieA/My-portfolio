@@ -1,85 +1,268 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
+import FloatingShapes from "../components/FloatingShapes";
+import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle } from "react-icons/fa";
 
-const Contact = () => {
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  
+  const [status, setStatus] = useState("idle");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    // YOUR FORMSPREE ENDPOINT
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xnjqwnjw";
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" }); 
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
+  };
+
   return (
-    <section
-      id="contact"
-      className="w-full py-32 bg-[#07131d] relative overflow-hidden"
-    >
-      {/* Soft background gold glow */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] blur-[160px] opacity-20"
-        style={{ background: "#C2A878" }}
-      />
+    <section id="contact" className="w-full py-24 bg-[#07131d] relative overflow-hidden px-6">
+      
+      {/* --- BACKGROUND GRID --- */}
+      <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5">
+        <div className="w-[1px] h-full bg-white"></div>
+        <div className="w-[1px] h-full bg-white hidden md:block"></div>
+        <div className="w-[1px] h-full bg-white hidden lg:block"></div>
+        <div className="w-[1px] h-full bg-white"></div>
+      </div>
 
-      {/* Header */}
-      <div className="text-center mb-16">
-        <p className="tracking-[0.25em] text-sm mb-4" style={{ color: "#C2A878" }}>
-          CONTACT
-        </p>
-        <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: "#E8EAEF" }}>
-          Let’s Work Together
+      <FloatingShapes />
+
+      {/* --- HEADER --- */}
+      <div className="relative z-10 text-center mb-16">
+        <div className="flex items-center justify-center gap-4 mb-4">
+          <span className="h-[1px] w-8 bg-[#C2A878]"></span>
+          <span className="text-[#C2A878] font-mono text-sm tracking-widest uppercase">
+            // Connect
+          </span>
+          <span className="h-[1px] w-8 bg-[#C2A878]"></span>
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-bold text-[#E8EAEF] tracking-tight">
+          Get in Touch<span className="text-[#C2A878]">.</span>
         </h2>
       </div>
 
-      {/* Contact Box */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.92 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2 }}
-        className="max-w-3xl mx-auto bg-[#0c1824] border border-[#C2A87833]
-                   p-10 rounded-2xl shadow-xl shadow-black/40"
-      >
-        {/* Email icon */}
-        <div className="flex justify-center mb-8 text-[#C2A878]">
-          <Mail size={40} />
-        </div>
-
-        {/* Form */}
-        <form
-          className="grid grid-cols-1 gap-6 text-[#E8EAEF]"
-          onSubmit={(e) => e.preventDefault()}
+      <div className="relative z-10 max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+        
+        {/* === LEFT COLUMN: INFO === */}
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="flex flex-col justify-center"
         >
-          <div>
-            <label className="block mb-2 text-sm text-[#C9CCD3]">Name</label>
-            <input
-              type="text"
-              className="w-full p-4 rounded-lg bg-[#0e1a28] border border-[#C2A87833] 
-                         text-white outline-none focus:border-[#C2A878]"
-            />
+          <div className="mb-10">
+             <h3 className="text-2xl font-bold text-[#E8EAEF] mb-6">
+               Let's build something scalable.
+             </h3>
+             <p className="text-[#C9CCD3] text-lg leading-relaxed border-l-2 border-[#C2A878] pl-6">
+               I am currently open to <strong className="text-white">internships</strong> and <strong className="text-white">collaborations</strong>. 
+               Whether you have a question about my research, a project proposal, or just want to connect, feel free to reach out.
+             </p>
           </div>
 
-          <div>
-            <label className="block mb-2 text-sm text-[#C9CCD3]">Email</label>
-            <input
-              type="email"
-              className="w-full p-4 rounded-lg bg-[#0e1a28] border border-[#C2A87833] 
-                         text-white outline-none focus:border-[#C2A878]"
-            />
-          </div>
+          <div className="space-y-8">
+            {/* Email */}
+            <div className="group">
+              <label className="block text-xs font-mono text-[#C2A878] uppercase tracking-widest mb-2 opacity-80">
+                // Email
+              </label>
+              <a href="mailto:fauxieahmed22@gmail.com" className="flex items-center gap-4 text-xl text-[#E8EAEF] hover:text-[#C2A878] transition-colors">
+                <FaEnvelope /> fauxieahmed22@gmail.com
+              </a>
+            </div>
 
-          <div>
-            <label className="block mb-2 text-sm text-[#C9CCD3]">Message</label>
-            <textarea
-              rows="5"
-              className="w-full p-4 rounded-lg bg-[#0e1a28] border border-[#C2A87833] 
-                         text-white outline-none focus:border-[#C2A878]"
-            ></textarea>
-          </div>
+            {/* Location */}
+            <div className="group">
+              <label className="block text-xs font-mono text-[#C2A878] uppercase tracking-widest mb-2 opacity-80">
+                // Location
+              </label>
+              <div className="flex items-center gap-4 text-xl text-[#E8EAEF]">
+                <FaMapMarkerAlt /> Kedah, Malaysia
+              </div>
+            </div>
 
-          {/* Button */}
-          <button
-            className="mt-4 bg-[#C2A878] text-[#0a1a28] py-3 px-8 rounded-lg font-medium 
-                       hover:bg-[#d3bb90] transition"
-          >
-            Send Message
-          </button>
-        </form>
-      </motion.div>
+            {/* Socials */}
+            <div>
+              <label className="block text-xs font-mono text-[#C2A878] uppercase tracking-widest mb-4 opacity-80">
+                // Socials
+              </label>
+              <div className="flex gap-4">
+                <a href="https://linkedin.com/in/fauziyya-ahmed" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-white/10 bg-[#0d1b27] flex items-center justify-center text-[#C9CCD3] hover:bg-[#C2A878] hover:text-[#07131d] hover:border-[#C2A878] transition-all">
+                  <FaLinkedin size={20} />
+                </a>
+                <a href="https://github.com/FauzieA" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-white/10 bg-[#0d1b27] flex items-center justify-center text-[#C9CCD3] hover:bg-[#C2A878] hover:text-[#07131d] hover:border-[#C2A878] transition-all">
+                  <FaGithub size={20} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+
+        {/* === RIGHT COLUMN: FORM === */}
+        <motion.div
+           initial={{ opacity: 0, x: 30 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           transition={{ duration: 0.6, delay: 0.2 }}
+           viewport={{ once: true }}
+        >
+          <div className="relative bg-[#0d1b27] p-8 md:p-10 border border-white/10 shadow-2xl h-full min-h-[450px] flex items-center justify-center group">
+            
+            {/* Corner Brackets (Kept these for the "Tech" feel, but subtle) */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#C2A878]/50"></div>
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#C2A878]/50"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#C2A878]/50"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#C2A878]/50"></div>
+
+            {/* --- SUCCESS STATE --- */}
+            {status === "success" ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center w-full"
+              >
+                <div className="w-16 h-16 border-2 border-[#C2A878] text-[#C2A878] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <FaCheckCircle size={30} />
+                </div>
+                <h3 className="text-xl font-bold text-[#E8EAEF] mb-4">
+                  Message Sent
+                </h3>
+                <p className="text-[#C9CCD3] mb-8">
+                  Thank you for reaching out. I'll get back to you shortly.
+                </p>
+                <button 
+                  onClick={() => setStatus("idle")} 
+                  className="text-sm text-[#C2A878] hover:text-white border-b border-[#C2A878] pb-1"
+                >
+                  Send another message
+                </button>
+              </motion.div>
+            ) : (
+              
+              /* --- FORM STATE --- */
+              <form onSubmit={handleSubmit} className="w-full space-y-8 relative z-10">
+                
+                {/* Name Input */}
+                <div className="relative group">
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    disabled={status === "submitting"}
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-[#E8EAEF] font-mono focus:outline-none focus:border-[#C2A878] transition-all placeholder-transparent peer disabled:opacity-50"
+                    placeholder="Name"
+                    id="name"
+                  />
+                  <label 
+                    htmlFor="name" 
+                    className="absolute left-0 -top-3.5 text-[#C2A878] text-xs font-mono uppercase tracking-widest transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#C9CCD3]/50 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[#C2A878] peer-focus:text-xs"
+                  >
+                    Name
+                  </label>
+                </div>
+
+                {/* Email Input */}
+                <div className="relative group">
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={status === "submitting"}
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-[#E8EAEF] font-mono focus:outline-none focus:border-[#C2A878] transition-all placeholder-transparent peer disabled:opacity-50"
+                    placeholder="Email"
+                    id="email"
+                  />
+                  <label 
+                    htmlFor="email" 
+                    className="absolute left-0 -top-3.5 text-[#C2A878] text-xs font-mono uppercase tracking-widest transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#C9CCD3]/50 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[#C2A878] peer-focus:text-xs"
+                  >
+                    Email
+                  </label>
+                </div>
+
+                {/* Message Input */}
+                <div className="relative group">
+                  <textarea 
+                    rows="4"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    disabled={status === "submitting"}
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-[#E8EAEF] font-mono focus:outline-none focus:border-[#C2A878] transition-all placeholder-transparent peer resize-none disabled:opacity-50"
+                    placeholder="Message"
+                    id="message"
+                  />
+                  <label 
+                    htmlFor="message" 
+                    className="absolute left-0 -top-3.5 text-[#C2A878] text-xs font-mono uppercase tracking-widest transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-[#C9CCD3]/50 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[#C2A878] peer-focus:text-xs"
+                  >
+                    Message
+                  </label>
+                </div>
+
+                {/* Error Message */}
+                {status === "error" && (
+                  <p className="text-red-400 text-xs font-mono text-center">
+                    Error sending message. Please try again.
+                  </p>
+                )}
+
+                <button 
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="w-full py-4 bg-[#C2A878] text-[#07131d] font-bold font-mono text-sm uppercase tracking-widest hover:bg-white transition-all flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed group"
+                >
+                  {status === "submitting" ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      Send Message 
+                      <FaPaperPlane className="group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
+        </motion.div>
+
+      </div>
     </section>
   );
-};
-
-export default Contact;
+}

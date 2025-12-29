@@ -1,4 +1,4 @@
-import mainPic from "../assets/project-filler.webp";
+import mainPic from "../assets/project-filler.webp"; // Using this as placeholder for new projects
 import library1 from "../assets/library1.png";
 import library2 from "../assets/library2.png";
 import library3 from "../assets/library3.png";
@@ -24,15 +24,20 @@ import traffic4 from "../assets/traffic4.png";
 import traffic5 from "../assets/traffic5.png";
 import traffic6 from "../assets/traffic6.png";
 import traffic7 from "../assets/traffic7.png";
+import iot1 from "../assets/iot1.png";
+import iot2 from "../assets/iot2.png";
+
 
 export const projects = [
+  // --- 1. FYP (IoT) ---
   {
     id: "smart-lighting-cctv",
     title: "Unified Smart Lighting & CCTV Integration",
+    category: "IoT & Robotics",
     tag: "IoT / PYTHON / APIs",
     description: "A brand-agnostic IoT platform unifying lighting and CCTV systems with automation and energy efficiency.",
     detailedDescription: `
-This project developed a unified IoT platform that integrates lighting and CCTV systems across multiple brands. The platform allows centralized monitoring, automated scheduling, and real-time control of devices to improve energy efficiency and operational safety. It features a secure four-layer architecture for reliable communication and supports remote management via dashboards. The system was implemented using Python, IoT protocols, and REST APIs, and tested with simulated devices to ensure cross-device compatibility and automation reliability.
+This project developed a unified IoT platform that integrates lighting and CCTV systems across multiple brands. The platform allows centralized monitoring, automated scheduling, and real-time control of devices to improve energy efficiency and operational safety. It features a secure four-layer architecture for reliable communication and supports remote management via dashboards. The system was implemented using Python, IoT protocols, and REST APIs, and tested with real devices to ensure cross-device compatibility and automation reliability.
     `,
     features: [
       "Cross-device lighting and CCTV automation",
@@ -51,44 +56,102 @@ This project developed a unified IoT platform that integrates lighting and CCTV 
     link: null,
   },
 
+  // --- 2. TRAFFIC PREDICTION (Data Science - Award Winner) ---
   {
-    id: "personal-library",
-    title: "Personal Library & Book Recommendation",
-    tag: "PYTHON / STREAMLIT / NLP",
-    description: "Streamlit-based reading tracker with a hybrid metadata + TF-IDF recommendation engine.",
+    id: "traffic-congestion",
+    title: "Traffic Congestion Prediction",
+    category: "Data Science",
+    tag: "PYTHON / ML / RESEARCH",
+    description: "Award-winning research evaluating classical ML models vs. Deep Learning for urban traffic forecasting.",
     detailedDescription: `
-This project built a personal library application using Streamlit that allows users to track reading history and receive book recommendations. A hybrid recommendation system was implemented using both metadata similarity and TF-IDF text vectorization. The system suggests books based on user preferences, reading history, and textual similarity, providing both personalized and serendipitous recommendations. The app also includes analytics dashboards to visualize reading patterns and supports adding new books seamlessly.
+This research investigated whether classical machine learning models can achieve competitive performance for short-term traffic congestion prediction compared to complex deep learning models. Four models were implemented: Logistic Regression, Random Forest, SVM, and KNN. Extensive preprocessing, feature engineering, and time-based transformations were applied. Models were evaluated using accuracy, precision, recall, F1-score, and confusion matrices. Random Forest and SVM achieved the highest predictive performance. This paper won the Best Paper Award (June 2025) for its contribution to efficient, interpretable urban traffic management.
     `,
     features: [
-      "Hybrid metadata + TF-IDF recommender",
-      "Personal reading history tracking",
-      "Automated book suggestions",
-      "Clean Streamlit UI",
+      "Winner: Best Paper Award 2025",
+      "Comparative analysis: Classical ML vs. Neural Networks",
+      "Engineered temporal and environmental features",
+      "High-accuracy short-term forecasting",
     ],
-    stack: ["Python", "Streamlit", "NLP", "TF-IDF"],
+    stack: ["Python", "scikit-learn", "Pandas", "Matplotlib"],
     images: [
-      { src: library1, caption: "Library dashboard" },
-      { src: library2, caption: "Analytics dashboard" },
-      { src: library3, caption: "Recommendation results" },
-      { src: library4, caption: "Add Book" },
+      { src: traffic1, caption: "Methodology flow" },
+      { src: traffic2, caption: "Dataset overview" },
+      { src: traffic3, caption: "Feature engineering" },
+      { src: traffic4, caption: "Training workflow" },
+      { src: traffic5, caption: "Confusion matrices" },
+      { src: traffic6, caption: "Model accuracy comparison" },
+      { src: traffic7, caption: "Real-time prediction output" },
     ],
-    cardImage: library1,
+    cardImage: traffic6,
     link: null,
   },
 
+  // --- 3. WRITER IDENTIFICATION (Data Science / CV) - NEW ADDITION ---
   {
-    id: "technexus-website",
-    title: "TechNexus Website",
-    tag: "REACT / TAILWIND / JAVASCRIPT",
-    description: "A responsive web platform showcasing TechNexus programs, missions, and student services.",
+    id: "writer-identification",
+    title: "Deep Learning Handwriting Recognition",
+    category: "Data Science",
+    tag: "TENSORFLOW / CV / FASTAPI",
+    description: "A CNN-based writer identification system achieving 87% accuracy across 70 distinct handwriting styles.",
     detailedDescription: `
-The TechNexus website serves as a hub for the global student-led initiative, showcasing its programs, workshops, and services for university students entering tech. The website features a responsive UI built with React and Tailwind CSS, interactive sections, and clear program information. It supports smooth navigation and highlights TechNexus events, projects, and bootcamps. The website also demonstrates best practices for modular React development and responsive design for user engagement.
+Developed a robust writer identification system using Convolutional Neural Networks (CNNs) to analyze and classify handwriting patterns. The model was trained on a dataset of 70 distinct handwriting styles, achieving an 87% test accuracy. The project involved building a custom preprocessing pipeline using OpenCV for line segmentation, word extraction, and data augmentation. The final model was deployed as a REST API using FastAPI, enabling real-time inference on uploaded document images.
     `,
     features: [
-      "Responsive, modern UI",
-      "Animated interactions",
-      "Clear service and program sections",
-      "Optimized for student engagement",
+      "Custom CNN Architecture for pattern recognition",
+      "87% Accuracy on 70 unique handwriting styles",
+      "OpenCV pipeline for segmentation & augmentation",
+      "Real-time API deployment via FastAPI",
+    ],
+    stack: ["Python", "TensorFlow", "OpenCV", "FastAPI"],
+    images: [
+      { src: mainPic, caption: "System Architecture" }, // Placeholder
+      { src: mainPic, caption: "Preprocessing Pipeline" }, // Placeholder
+      { src: mainPic, caption: "Accuracy Graphs" }, // Placeholder
+    ],
+    cardImage: mainPic, // Placeholder
+    link: null,
+  },
+
+  // --- 4. AUTONOMOUS ROBOT (IoT / Robotics) - NEW ADDITION ---
+ {
+    id: "autonomous-robot",
+    title: "IoT Line-Following Robot (Simulation)",
+    category: "IoT & Robotics",
+    tag: "C++ / WOKWI / ESP32",
+    description: "A high-fidelity Wokwi simulation of an autonomous robot with PID control and live telemetry.",
+    detailedDescription: `
+Designed and engineered a complete simulation of an autonomous line-following robot within the Wokwi environment. The system utilizes a virtual ESP32 to process signals from simulated infrared sensors using PID control logic for precise navigation. It integrates with a real-time MQTT dashboard to transmit telemetry data (speed, battery status, sensor readings) over Wi-Fi, demonstrating complex hardware-software interaction and logic validation in a virtualized setting without the need for physical prototypes.
+    `,
+    features: [
+      "Wokwi-based hardware simulation",
+      "PID Control Logic implementation",
+      "Real-time Telemetry via MQTT",
+      "Virtual Sensor Integration",
+    ],
+    stack: ["C++", "Wokwi", "ESP32", "MQTT"],
+    images: [
+      { src: iot1, caption: "Telemetry Dashboard" }, 
+      { src: iot2, caption: "Wokwi Simulation Environment" }, 
+    ],
+    cardImage: iot1, 
+    link: null,
+  },
+
+  // --- 5. TECHNEXUS (Web Dev) ---
+  {
+    id: "technexus-website",
+    title: "TechNexus Official Platform",
+    category: "Web Dev",
+    tag: "REACT / TAILWIND / UX",
+    description: "A responsive web platform showcasing global student initiatives, bootcamps, and resources.",
+    detailedDescription: `
+The TechNexus website serves as the central hub for a global student-led initiative, showcasing programs, workshops, and services for university students entering tech. The platform features a high-performance UI built with React and Tailwind CSS, ensuring fast load times and seamless mobile compatibility. Key sections include dynamic event listings, project showcases, and resource libraries. The project demonstrates best practices in component-based architecture and accessible modern web design.
+    `,
+    features: [
+      "Responsive, mobile-first UI",
+      "Component-based architecture",
+      "Optimized performance & accessibility",
+      "Hub for global student outreach",
     ],
     stack: ["React", "Tailwind CSS", "JavaScript"],
     images: [
@@ -102,57 +165,57 @@ The TechNexus website serves as a hub for the global student-led initiative, sho
     link: "https://www.technexus.club",
   },
 
+  // --- 6. PERSONAL LIBRARY (Web Dev / Data Science) ---
   {
-    id: "customer-churn",
-    title: "Customer Churn Prediction",
-    tag: "PYTHON / ML / DATA SCIENCE",
-    description: "A supervised ML model predicting high-risk customers with feature engineering and SHAP interpretability.",
+    id: "personal-library",
+    title: "Personal Library & Recommendation Engine",
+    category: "Data Science",
+    tag: "STREAMLIT / NLP / TF-IDF",
+    description: "A reading tracking app with a hybrid recommendation engine using metadata and NLP.",
     detailedDescription: `
-This project focused on predicting customer churn using classical supervised machine learning techniques. Multiple models were trained including Logistic Regression, KNN, Decision Trees, and SVM. Performance metrics such as accuracy, precision, recall, and F1-score were evaluated, with a particular focus on the minority churn class. Feature importance was analyzed using Random Forest and SHAP values to provide interpretability. The model identifies high-risk customers and provides actionable business recommendations, bridging the gap between predictive modeling and practical retention strategies.
+Built a full-stack personal library application using Streamlit that allows users to track reading habits and receive intelligent book suggestions. The core feature is a hybrid recommendation system that combines metadata filtering with TF-IDF text vectorization to analyze book summaries. This allows the system to suggest books based on both genre and textual similarity. The application also visualizes reading trends through interactive analytics dashboards.
     `,
     features: [
-      "Churn risk prediction for high-value customers",
-      "Feature engineering and model evaluation pipeline",
-      "SHAP explainability for interpreting predictions",
-      "Data-driven business recommendations"
+      "Hybrid Recommender (Metadata + NLP)",
+      "Interactive Analytics Dashboards",
+      "Personal Reading History Tracking",
+      "Streamlit-based Rapid Prototyping",
     ],
-    stack: ["Python", "scikit-learn", "SHAP"],
+    stack: ["Python", "Streamlit", "NLP", "Pandas"],
     images: [
-      { src: churn1, caption: "Model Accuracy & F1 comparison" },
-      { src: churn2, caption: "KNN performance for different k values" },
-      { src: churn3, caption: "Random Forest feature importance" },
-      { src: churn4, caption: "SHAP summary plot" },
+      { src: library1, caption: "Library dashboard" },
+      { src: library2, caption: "Analytics dashboard" },
+      { src: library3, caption: "Recommendation results" },
+      { src: library4, caption: "Add Book" },
     ],
-    cardImage: churn1,
+    cardImage: library1,
     link: null,
   },
 
+  // --- 7. CHURN PREDICTION (Data Science) ---
   {
-    id: "traffic-congestion",
-    title: "Traffic Congestion Prediction",
-    tag: "PYTHON / ML / DATA SCIENCE",
-    description: "Research evaluating classical ML models for urban traffic congestion prediction.",
+    id: "customer-churn",
+    title: "Customer Churn Prediction",
+    category: "Data Science",
+    tag: "ML / SHAP / ANALYTICS",
+    description: "Supervised ML model to identify high-risk customers with explainable AI insights.",
     detailedDescription: `
-This research investigated whether classical machine learning models can achieve competitive performance for short-term traffic congestion prediction compared to deep learning models. Four models were implemented: Logistic Regression, Random Forest, SVM, and KNN. Extensive preprocessing, feature engineering, and time-based transformations were applied. Models were evaluated using accuracy, precision, recall, F1-score, and confusion matrices. Random Forest and SVM achieved the highest predictive performance. The study highlights the feasibility of interpretable, efficient classical models for real-time deployment in urban traffic management, addressing a research gap in existing literature.
+Focused on predicting customer churn using classical supervised machine learning techniques. Multiple models were trained including Logistic Regression, KNN, Decision Trees, and SVM, with a focus on handling class imbalance. A key component of this project was interpretability; Random Forest feature importance and SHAP (SHapley Additive exPlanations) values were used to explain *why* specific customers were flagged as high-risk. This bridge between raw prediction and business insight allows for targeted retention strategies.
     `,
     features: [
-      "Short-term traffic congestion prediction",
-      "Extensive feature engineering including time, mobility, and environmental data",
-      "Comparison of classical ML models with multi-metric evaluation",
-      "Emphasis on interpretability and real-time usability",
-      "Filling research gap versus deep learning approaches",
+      "High-accuracy churn risk classification",
+      "SHAP values for model explainability",
+      "Handling of imbalanced datasets",
+      "Actionable business insights",
     ],
-    stack: ["Python", "scikit-learn", "Pandas", "Seaborn", "Matplotlib"],
+    stack: ["Python", "scikit-learn", "SHAP", "Matplotlib"],
     images: [
-      { src: traffic1, caption: "Methodology flow" },
-      { src: traffic2, caption: "Dataset overview" },
-      { src: traffic3, caption: "Feature engineering" },
-      { src: traffic4, caption: "Training workflow" },
-      { src: traffic5, caption: "Confusion matrices" },
-      { src: traffic6, caption: "Model accuracy comparison" },
-      { src: traffic7, caption: "Real-time prediction output" },
+      { src: churn1, caption: "Model Accuracy & F1 comparison" },
+      { src: churn2, caption: "KNN performance metrics" },
+      { src: churn3, caption: "Feature importance analysis" },
+      { src: churn4, caption: "SHAP summary plot" },
     ],
-    cardImage: traffic6,
+    cardImage: churn1,
     link: null,
   },
 ];
