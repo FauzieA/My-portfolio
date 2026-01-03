@@ -99,8 +99,8 @@ export default function Hero() {
             variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
             className="max-w-xl text-[#C9CCD3] text-lg leading-relaxed mb-10 border-l-2 border-white/10 pl-6"
           >
-            A Computer Science Senior specializing in <span className="text-white font-bold">Data Science</span> and <span className="text-white font-bold">Web Development</span>. 
-            I engineer intelligent, data-driven systems, occasionally bridging the digital world with the physical via <span className="text-[#C2A878]">IoT</span>.
+            A Computer Science Senior specializing in <span className="text-white font-bold">Data Science</span> and <span className="text-white font-bold">Software Engineering</span>. 
+            I build intelligent, data-driven systems and scalable web applications, with experience in bridging digital logic with physical environments.
           </motion.p>
 
           {/* Buttons & Socials */}

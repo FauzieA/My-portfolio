@@ -10,9 +10,9 @@ export default function HeroTitles() {
         options={{
           strings: [
             "Data Scientist",
+            "Software Engineer",
             "Full-Stack Developer",
-            "IoT Developer",
-            "Computer Science Senior",
+            "TechNexus Co-Founder",
           ],
           autoStart: true,
           loop: true,
