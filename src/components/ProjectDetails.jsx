@@ -15,7 +15,7 @@ const ProjectDetail = () => {
   if (!project) return <div className="min-h-screen flex items-center justify-center bg-[#07131d] text-[#C2A878] font-mono">// ERROR: Project Not Found</div>;
 
   return (
-    <section className="w-full min-h-screen relative bg-[#07131d] overflow-hidden">
+    <section className="w-full min-h-screen relative bg-[#FDFBF7] overflow-hidden">
       <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5">
         <div className="w-[1px] h-full bg-white"></div>
         <div className="w-[1px] h-full bg-white hidden md:block"></div>
@@ -24,7 +24,7 @@ const ProjectDetail = () => {
       <FloatingShapes />
 
       {/* --- TOP NAV (Technical Bar) --- */}
-<div className="fixed top-0 left-0 w-full z-[60] px-6 py-4 bg-[#07131d] border-b border-white/5 flex justify-between items-center">
+<div className="fixed top-0 left-0 w-full z-[60] px-6 py-4 bg-[#FDFBF7] border-b border-white/5 flex justify-between items-center">
   {/* z-[60] ensures it sits ABOVE the global Navbar (which is usually z-50).
       Using solid bg-[#07131d] instead of transparency hides the main nav completely.
   */}
