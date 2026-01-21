@@ -1,110 +1,115 @@
 import React from "react";
 import { motion } from "framer-motion";
 import mainPic from "../assets/finalhero.JPG";
-import { FaDownload } from "react-icons/fa"; 
+import { FaDownload, FaCode, FaChartBar, FaGraduationCap, FaCircle } from "react-icons/fa"; 
 import resumePdf from "../assets/resume.pdf";
 
-// --- STATS ---
 const stats = [
-  { label: "Global Certifications", value: "08+" }, 
-  { label: "Projects Completed", value: "15+" },
-  { label: "Core Stack", value: "Python & React" }, // Honest and specific
+  { label: "Certifications", value: "08+", icon: <FaGraduationCap />, color: "text-blue-400" }, 
+  { label: "Projects", value: "15+", icon: <FaChartBar />, color: "text-pink-400" },
+  { label: "Stack", value: "Py & React", icon: <FaCode />, color: "text-[#C2A878]" },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="w-full min-h-screen bg-[#07131d] relative overflow-hidden flex items-center">
+    <section id="about" className="w-full min-h-screen bg-[#07131d] relative overflow-hidden py-24 flex items-center">
       
-      {/* Background Subtle Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#C2A878]/5 skew-x-12 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#3776AB]/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Grid Accent */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: `linear-gradient(#C2A878 1px, transparent 1px), linear-gradient(90deg, #C2A878 1px, transparent 1px)`, backgroundSize: '50px 50px' }} 
+      />
 
-      {/* --- MAIN GRID --- */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-center">
-        
-        {/* ==== LEFT COLUMN: TEXT ==== */}
-        <div className="lg:col-span-7 px-6 md:px-16 lg:pl-24 lg:pr-12 py-12 lg:py-24 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <span className="h-[2px] w-12 bg-[#C2A878]"></span>
-              <span className="text-[#C2A878] font-bold tracking-[0.2em] uppercase text-sm">
-                About Me
-              </span>
-            </div>
+          {/* --- LEFT: CONTENT MODULE (8 Columns) --- */}
+          <div className="lg:col-span-8 space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-[#0d1b27]/80 border border-white/5 p-8 md:p-12 backdrop-blur-md rounded-sm relative"
+            >
+              {/* Header Bar */}
+              <div className="flex items-center gap-2 mb-8 opacity-40">
+                <FaCircle size={8} className="text-red-400" />
+                <FaCircle size={8} className="text-yellow-400" />
+                <FaCircle size={8} className="text-green-400" />
+                <span className="ml-4 text-[10px] font-mono tracking-[0.3em] uppercase">System.Identity_Module</span>
+              </div>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#E8EAEF] leading-tight mb-8">
-              Building data-driven applications <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C2A878] to-[#FFF]">
-                with purpose.
-              </span>
-            </h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#E8EAEF] leading-tight mb-8">
+                Building data-driven applications <br />
+                <span className="text-[#C2A878]">with purpose.</span>
+              </h2>
 
-            <div className="text-lg text-[#C9CCD3] leading-relaxed space-y-6 max-w-2xl">
-              <p>
-                I am <strong className="text-white">Fauziyya Abdullahi Ahmed</strong>, a Computer Science senior with a dual focus on 
-                <span className="text-[#C2A878]"> Data Science</span> and <span className="text-[#C2A878]"> Web Development</span>.
-                I don't just build models in a notebook; I build the applications that make those insights accessible.
-              </p>
-              <p>
-                My workflow is Python-centric: extracting insights with <span className="text-white font-bold">Pandas</span>, architecting robust backends with <span className="text-white font-bold">Django</span>, and creating interactive frontends with <span className="text-white font-bold">React</span>.
-              </p>
-              <p>
-                Whether it's predicting traffic patterns or optimizing educational platforms, I aim to bridge the gap between complex algorithms and intuitive user experiences.
-              </p>
-            </div>
+              <div className="text-lg text-[#C9CCD3] leading-relaxed space-y-6 mb-12">
+                <p>
+                  I am <strong className="text-white">Fauziyya Abdullahi Ahmed</strong>, a Computer Science senior specializing in 
+                  <span className="text-[#C2A878]"> Data Science</span> and <span className="text-[#C2A878]"> Web Development</span>.
+                  I don't just build models in a notebook; I build the applications that make those insights accessible.
+                </p>
+                <p>
+                  My workflow is Python-centric: extracting insights with <span className="text-white font-bold">Pandas</span>, architecting backends with <span className="text-white font-bold">Django</span>, and creating interactive frontends with <span className="text-white font-bold">React</span>.
+                </p>
+              </div>
 
-            {/* --- STATS ROW --- */}
-            <div className="grid grid-cols-3 gap-6 mt-12 border-t border-white/10 pt-8 max-w-2xl">
-              {stats.map((stat, index) => (
-                <div key={index}>
-                  <h4 className="text-2xl md:text-3xl font-bold text-[#E8EAEF]">{stat.value}</h4>
-                  <p className="text-xs md:text-sm text-[#C9CCD3]/60 uppercase tracking-wider mt-1">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+              {/* --- INTEGRATED STATS (Filling the bottom space) --- */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-8 border-t border-white/5">
+                {stats.map((stat, index) => (
+                  <div key={index} className="flex flex-col">
+                    <div className={`text-xl font-bold text-white flex items-center gap-2`}>
+                      <span className={stat.color}>{stat.icon}</span>
+                      {stat.value}
+                    </div>
+                    <span className="text-[10px] text-[#C9CCD3]/40 uppercase tracking-widest mt-1 font-mono">
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
-            {/* --- SINGLE ACTION BUTTON --- */}
-            <div className="mt-12">
-              <a
-                href={resumePdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex px-8 py-4 bg-[#C2A878] text-[#07131d] font-bold text-sm uppercase tracking-wide rounded-none items-center gap-3 hover:bg-[#d4b985] transition-all shadow-[0_0_20px_rgba(194,168,120,0.2)]"
-              >
-                Download Resume 
-                <FaDownload className="group-hover:translate-y-1 transition-transform" />
+            {/* Bottom Action Row */}
+            <div className="flex items-center gap-6 pl-4">
+              <a href={resumePdf} target="_blank" rel="noopener noreferrer"
+                 className="px-8 py-4 bg-[#C2A878] text-[#07131d] font-bold text-xs uppercase tracking-widest hover:bg-white transition-all">
+                Download_CV.exe
               </a>
+              <span className="h-[1px] flex-grow bg-white/5"></span>
+            </div>
+          </div>
+
+          {/* --- RIGHT: VISUAL MODULE (4 Columns) --- */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="lg:col-span-4 relative group"
+          >
+            {/* The "Scanner" Frame */}
+            <div className="relative border border-white/10 p-3 bg-[#0d1b27]">
+              <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-[#C2A878]" />
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-[#C2A878]" />
+              
+              <div className="overflow-hidden relative aspect-[3/4]">
+                <img 
+                  src={mainPic} 
+                  alt="Fauziyya Profile" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                />
+                {/* Visual Overlay Scanlines */}
+                <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%] opacity-20" />
+              </div>
             </div>
 
+            {/* Subtitle Badge */}
+            <div className="mt-4 font-mono text-[10px] text-[#C2A878] flex justify-between items-center px-2">
+              <span>STATUS: ACTIVE</span>
+              <span>DEV_COORD: 40.7128° N</span>
+            </div>
           </motion.div>
-        </div>
 
-        {/* ==== RIGHT COLUMN: IMAGE ==== */}
-        <div className="lg:col-span-5 relative h-full min-h-[500px] lg:min-h-screen w-full">
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="absolute inset-0 w-full h-full"
-          >
-            <img 
-              src={mainPic} 
-              alt="Fauziyya Profile" 
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000 ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#07131d] via-[#07131d]/20 to-transparent lg:w-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#07131d] to-transparent lg:hidden"></div>
-            <div className="absolute top-10 right-10 w-full h-full border-r border-t border-[#C2A878]/30 hidden lg:block translate-x-4 -translate-y-4"></div>
-          </motion.div>
         </div>
-
       </div>
     </section>
   );
