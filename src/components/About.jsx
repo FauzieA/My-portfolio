@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import mainPic from "../assets/fauziyyaa.jpg";
+import mainPic from "../assets/finalhero.JPG";
 import { FaDownload } from "react-icons/fa"; 
 import resumePdf from "../assets/resume.pdf";
 
