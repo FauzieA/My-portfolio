@@ -2,19 +2,29 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard.jsx";
 import FloatingShapes from "../components/FloatingShapes";
-import { projects } from "../data/Projects"; 
+import { useTheme } from "../context/ThemeContext";
+import { projects } from "../data/Projects";
+import { FaArrowRight } from "react-icons/fa";
 
 const CATEGORIES = ["All", "Data Science", "Web Dev", "IoT & Robotics"];
 
+const categoryColors = {
+  'Data Science': '#BDE0FE',
+  'Web Dev': '#FFD1DC',
+  'IoT & Robotics': '#FFD6BA',
+};
+
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const { isDarkMode } = useTheme();
 
   const filteredProjects = projects.filter((project) => {
     if (activeCategory === "All") return true;
     return project.category === activeCategory || project.tag.includes(activeCategory);
   });
 
-  return (
+  if (isDarkMode) {
+    return (
     <section
       id="projects"
       className="w-full py-24 relative overflow-hidden bg-[#07131d]"
@@ -98,5 +108,78 @@ export default function Projects() {
         )}
       </div>
     </section>
-  );
+    );
+  } else {
+    /* LIGHT MODE PROJECTS */
+    return (
+      <section id="projects" className="py-12 lg:py-20 px-4 md:px-10 bg-[#FCFCFA] relative overflow-hidden">
+        <div className="max-w-6xl mx-auto relative">
+          
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 relative z-30 mb-8 lg:mb-12">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-1.5 h-1.5 bg-[#FFD1DC] rotate-45" />
+                <span className="text-[8px] lg:text-[10px] font-bold text-[#4A4E69]/40 uppercase tracking-[0.4em]">The Archive</span>
+              </div>
+              <h2 className="font-quicksand text-3xl md:text-5xl lg:text-6xl font-bold text-[#4A4E69] leading-tight">
+                Featured<br/><span className="italic underline decoration-[#FFD1DC] decoration-[3px]">projects.</span>
+              </h2>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                    activeCategory === cat
+                      ? "bg-[#4A4E69] text-white"
+                      : "bg-[#4A4E69]/10 text-[#4A4E69] hover:bg-[#4A4E69]/20"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => {
+                const accentColor = categoryColors[project.category] || '#BDE0FE';
+                return (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className={`relative group cursor-pointer ${index === 0 || index === 3 ? 'lg:col-span-2' : ''}`}
+                  >
+                    <a href={`#/project/${project.id}`} className="block">
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-[#4A4E69]/10 h-full">
+                        <div className="aspect-video bg-gradient-to-br from-[#BDE0FE]/20 to-[#FFD1DC]/20 p-6 flex flex-col justify-between">
+                          <div className="text-sm font-bold text-[#4A4E69]/60 uppercase tracking-widest">{project.category}</div>
+                          <h3 className="text-xl font-bold text-[#4A4E69] group-hover:text-[#FFB7C5] transition-colors">{project.title}</h3>
+                        </div>
+                        <div className="p-4 border-t border-[#4A4E69]/10">
+                          <p className="text-xs text-[#4A4E69]/60 font-mono">{project.tag}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+
+          {filteredProjects.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-[#4A4E69]/60 text-lg">No projects in this category</p>
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
 }

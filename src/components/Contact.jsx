@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import FloatingShapes from "../components/FloatingShapes";
+import { useTheme } from "../context/ThemeContext";
 import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle } from "react-icons/fa";
 
 export default function Contact() {
@@ -44,6 +45,71 @@ export default function Contact() {
     }
   };
 
+  const { isDarkMode } = useTheme();
+
+  if (!isDarkMode) {
+    return (
+      <section id="contact" className="py-12 lg:py-20 px-4 md:px-10 bg-[#FCFCFA] relative overflow-hidden">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFD1DC]/20 border border-[#FFD1DC] mb-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#4A4E69]">Contact</span>
+            </div>
+            <h2 className="font-quicksand text-3xl md:text-5xl lg:text-6xl font-bold text-[#4A4E69] leading-tight">
+              Let's <span className="italic underline decoration-[#BDE0FE] decoration-[3px]">connect.</span>
+            </h2>
+            <p className="text-[#4A4E69]/70 text-lg mt-6 max-w-2xl mx-auto">I'm always interested in hearing about new projects and ideas. Feel free to reach out!</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+            <motion.a href="https://github.com/FauzieA" target="_blank" rel="noopener noreferrer" className="bg-white p-6 rounded-2xl text-center border border-[#4A4E69]/10 hover:shadow-md transition-all group">
+              <FaGithub size={32} className="text-[#4A4E69] mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-[#4A4E69] mb-1">GitHub</h3>
+              <p className="text-sm text-[#4A4E69]/60">@FauzieA</p>
+            </motion.a>
+            
+            <motion.a href="https://www.linkedin.com/in/fauziyya-ahmed/" target="_blank" rel="noopener noreferrer" className="bg-white p-6 rounded-2xl text-center border border-[#4A4E69]/10 hover:shadow-md transition-all group">
+              <FaLinkedin size={32} className="text-blue-500 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-[#4A4E69] mb-1">LinkedIn</h3>
+              <p className="text-sm text-[#4A4E69]/60">Connect with me</p>
+            </motion.a>
+
+            <motion.a href="mailto:fauxieahmed22@gmail.com" className="bg-white p-6 rounded-2xl text-center border border-[#4A4E69]/10 hover:shadow-md transition-all group">
+              <FaEnvelope size={32} className="text-[#FFB7C5] mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-[#4A4E69] mb-1">Email</h3>
+              <p className="text-sm text-[#4A4E69]/60">Say hello</p>
+            </motion.a>
+          </div>
+
+          <motion.form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 md:p-12 border border-[#4A4E69]/10">
+            <div className="mb-6">
+              <label className="block text-sm font-bold text-[#4A4E69] mb-2">Name</label>
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 border border-[#4A4E69]/20 rounded-lg focus:outline-none focus:border-[#FFB7C5]" />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-sm font-bold text-[#4A4E69] mb-2">Email</label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 border border-[#4A4E69]/20 rounded-lg focus:outline-none focus:border-[#FFB7C5]" />
+            </div>
+
+            <div className="mb-8">
+              <label className="block text-sm font-bold text-[#4A4E69] mb-2">Message</label>
+              <textarea name="message" value={formData.message} onChange={handleChange} required rows="5" className="w-full px-4 py-3 border border-[#4A4E69]/20 rounded-lg focus:outline-none focus:border-[#FFB7C5]"></textarea>
+            </div>
+
+            <button type="submit" disabled={status === "submitting"} className="w-full bg-[#4A4E69] text-white font-bold py-3 rounded-lg hover:bg-[#4A4E69]/90 transition-all flex items-center justify-center gap-2">
+              {status === "idle" && <><FaPaperPlane /> Send Message</>}
+              {status === "submitting" && "Sending..."}
+              {status === "success" && <><FaCheckCircle /> Sent!</>}
+              {status === "error" && "Error - Try again"}
+            </button>
+          </motion.form>
+        </div>
+      </section>
+    );
+  }
+
+  /* DARK MODE CONTACT */
   return (
     <section id="contact" className="w-full py-24 bg-[#07131d] relative overflow-hidden px-6">
       
@@ -266,5 +332,5 @@ export default function Contact() {
 
       </div>
     </section>
-  );
+    );
 }

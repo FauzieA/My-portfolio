@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaDownload, FaCode, FaChartBar, FaGraduationCap, FaCircle, FaArrowRight } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 import mainPic from "../assets/headshot.jpg";
-import { FaDownload, FaCode, FaChartBar, FaGraduationCap, FaCircle } from "react-icons/fa"; 
+import headshot from "../assets/fauziyyaa.jpg"; 
+import inspoPic from "../assets/fauziyya.png";
 import resumePdf from "../assets/resume.pdf";
 
 const stats = [
@@ -10,8 +13,23 @@ const stats = [
   { label: "Stack", value: "Py & React", icon: <FaCode />, color: "text-[#C2A878]" },
 ];
 
+const statsDark = [
+  { label: "Certifications", value: "08+", icon: <FaGraduationCap />, color: "text-blue-400" }, 
+  { label: "Projects", value: "15+", icon: <FaChartBar />, color: "text-pink-400" },
+  { label: "Stack", value: "Py & React", icon: <FaCode />, color: "text-[#C2A878]" },
+];
+
+const statsLight = [
+  { label: "Certifications", value: "08+", icon: <FaGraduationCap />, color: "text-blue-500" }, 
+  { label: "Projects", value: "15+", icon: <FaChartBar />, color: "text-pink-400" },
+  { label: "Stack", value: "Py & React", icon: <FaCode />, color: "text-[#4A4E69]" },
+];
+
 export default function About() {
-  return (
+  const { isDarkMode } = useTheme();
+
+  if (isDarkMode) {
+    return (
     <section id="about" className="w-full min-h-screen bg-[#07131d] relative overflow-hidden py-24 flex items-center">
       
       {/* Background Grid Accent */}
@@ -112,5 +130,124 @@ export default function About() {
         </div>
       </div>
     </section>
-  );
+    );
+  } else {
+    /* LIGHT MODE ABOUT */
+    return (
+      <section 
+        id="about" 
+        className="mt-8 lg:mt-12 py-12 lg:py-20 relative px-4 md:px-10 bg-[#FCFCFA] overflow-hidden"
+      >
+        <div className="absolute inset-0 opacity-[0.25] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/felt.png')]" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-left mb-8 lg:mb-12"
+          >
+            <h2 className="font-quicksand text-3xl md:text-5xl lg:text-6xl font-bold text-[#4A4E69] mb-4 leading-tight">
+              About <span className="italic underline decoration-[#FFB7C5] decoration-[3px]">me.</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            {/* LEFT: Images */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="flex flex-col gap-6"
+            >
+              {/* Inspo Image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+              >
+                <img src={inspoPic} alt="Inspiration" className="w-full h-auto grayscale-[20%] sepia-[10%]" />
+              </motion.div>
+
+              {/* Headshot Image */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                className="relative z-10"
+              >
+                <img 
+                  src={headshot} 
+                  alt="Fauziyya" 
+                  className="w-full lg:max-w-[340px] h-auto drop-shadow-xl lg:drop-shadow-[20px_40px_60px_rgba(74,78,105,0.1)] rounded-xl lg:rounded-2xl" 
+                />
+
+                <motion.div 
+                  initial={{ x: 10, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="absolute -bottom-3 -right-2 lg:-bottom-6 lg:-right-8 px-4 py-2 lg:px-6 lg:py-3 bg-[#FFB7C5] text-[#4A4E69] font-bold text-[10px] lg:text-sm rounded-full shadow-lg"
+                >
+                  ✓ Verified
+                </motion.div>
+              </motion.div>
+            </motion.div>
+
+            {/* RIGHT: Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="flex flex-col gap-6"
+            >
+              <div className="text-base lg:text-lg text-[#4A4E69]/80 leading-relaxed space-y-4">
+                <p>
+                  <span className="font-bold">I'm a Computer Science senior</span> who specializes in Data Science and Software Engineering. 
+                  I believe in building <span className="italic">digital experiences that matter</span>.
+                </p>
+
+                <p>
+                  I work with <span className="font-bold text-[#4A4E69]">Python, React, and Django</span> to transform ideas into products. 
+                  From data pipelines to user interfaces, I love the entire journey from concept to deployment.
+                </p>
+
+                <p>
+                  <span className="italic">When I'm not coding</span>, I'm exploring design systems, learning about web accessibility, or contributing to open-source projects.
+                </p>
+              </div>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6 pt-6 border-t border-[#4A4E69]/10">
+                {statsLight.map((stat, index) => (
+                  <div key={index} className="text-left">
+                    <div className="text-2xl md:text-3xl font-bold text-[#4A4E69] flex items-center gap-2 mb-1">
+                      <span className={stat.color}>{stat.icon}</span>
+                      {stat.value}
+                    </div>
+                    <p className="text-[11px] md:text-xs text-[#4A4E69]/50 font-mono uppercase tracking-widest">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4 mt-8">
+                <motion.a
+                  href={resumePdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-3 bg-[#4A4E69] text-white font-bold text-sm rounded-full hover:bg-[#4A4E69]/90 transition-all"
+                >
+                  Resume <FaDownload size={12} />
+                </motion.a>
+
+                <motion.a
+                  href="#contact"
+                  className="flex items-center gap-2 px-6 py-3 border-2 border-[#4A4E69] text-[#4A4E69] font-bold text-sm rounded-full hover:bg-[#4A4E69]/5 transition-all"
+                >
+                  Let's Connect <FaArrowRight size={12} />
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 }

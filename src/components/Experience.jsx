@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import FloatingShapes from "../components/FloatingShapes";
+import { useTheme } from "../context/ThemeContext";
 import { FaBriefcase, FaChalkboardTeacher, FaDesktop, FaLeaf } from "react-icons/fa";
 
 const experiences = [
@@ -111,6 +112,7 @@ const Card = ({ data, index }) => {
 };
 
 export default function Experience() {
+  const { isDarkMode } = useTheme();
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -123,7 +125,8 @@ export default function Experience() {
     restDelta: 0.001
   });
 
-  return (
+  if (isDarkMode) {
+    return (
     <section id="experience" className="w-full py-24 bg-[#07131d] relative overflow-hidden px-4">
       <div className="absolute inset-0 flex justify-between pointer-events-none opacity-5">
         <div className="w-[1px] h-full bg-white"></div>
@@ -161,5 +164,57 @@ export default function Experience() {
         </div>
       </div>
     </section>
-  );
+    );
+  } else {
+    /* LIGHT MODE EXPERIENCE */
+    return (
+      <section id="experience" className="py-12 lg:py-20 px-4 md:px-10 bg-[#FCFCFA] relative overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BDE0FE]/20 border border-[#BDE0FE] mb-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#4A4E69]">Experience</span>
+            </div>
+            <h2 className="font-quicksand text-3xl md:text-5xl lg:text-6xl font-bold text-[#4A4E69] leading-tight">
+              My Professional<br/><span className="italic underline decoration-[#FFD1DC] decoration-[3px]">Journey.</span>
+            </h2>
+          </div>
+
+          <div className="space-y-8">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-2xl p-6 lg:p-8 border-l-4 border-[#FFB7C5] shadow-sm hover:shadow-md transition-all"
+              >
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <h3 className="text-xl lg:text-2xl font-bold text-[#4A4E69] mb-1">{exp.title}</h3>
+                    <p className="text-sm lg:text-base text-[#4A4E69]/60 font-medium">{exp.company}</p>
+                  </div>
+                  <span className="text-[10px] lg:text-xs font-mono font-bold text-[#FFB7C5] whitespace-nowrap px-3 py-1 bg-[#FFB7C5]/10 rounded-full">
+                    {exp.period}
+                  </span>
+                </div>
+
+                <p className="text-sm lg:text-base text-[#4A4E69]/80 leading-relaxed mb-6">{exp.description}</p>
+
+                <div className="flex flex-wrap gap-2">
+                  {exp.skills.map((skill, i) => (
+                    <span 
+                      key={i} 
+                      className="px-3 py-1 text-[11px] font-bold rounded-full bg-[#4A4E69]/5 text-[#4A4E69] border border-[#4A4E69]/10"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 }
