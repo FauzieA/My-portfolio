@@ -39,37 +39,41 @@ const experiences = [
   },
 ];
 
+
 const ExperienceCard = ({ data, index }) => {
+  const isEven = index % 2 === 0;
+
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="relative pl-12 md:pl-0 mb-24 group"
+      viewport={{ once: true, margin: "-100px" }}
+      className="relative pl-10 md:pl-0 mb-32 group"
     >
-      {/* Centered Timeline Dot (Desktop) */}
-      <div className="absolute left-0 md:left-1/2 top-0 w-[10px] h-[10px] bg-white border-2 border-[#FFB6C1] rounded-full z-10 transform -translate-x-1/2 group-hover:scale-150 transition-transform duration-300" />
+      {/* Centered Timeline Dot */}
+      <div className="absolute left-0 md:left-1/2 top-2 w-3 h-3 bg-white border-2 border-[#FFB6C1] rounded-full z-10 transform -translate-x-1/2 group-hover:bg-[#FFB6C1] transition-all duration-300 shadow-[0_0_10px_rgba(255,182,193,0.5)]" />
       
-      <div className={`flex flex-col ${index % 2 === 0 ? "md:items-end md:text-right" : "md:items-start md:text-left"}`}>
-        <div className="w-full md:w-[42%] p-8 bg-white border border-[#f0f0f0] hover:border-[#FFB6C1]/30 transition-all shadow-sm">
-          <div className={`flex flex-col mb-4 ${index % 2 === 0 ? "md:items-end" : "md:items-start"}`}>
-            <span className="text-[#FFB6C1] text-[9px] font-bold tracking-[0.4em] uppercase mb-2">
+      <div className={`flex flex-col ${isEven ? "md:items-end md:text-right" : "md:items-start md:text-left"}`}>
+        {/* Tightened width from 42% to 45% for less "gap" in the middle */}
+        <div className="w-full md:w-[45%] p-0 md:p-4 bg-transparent transition-all">
+          <div className={`flex flex-col mb-4 ${isEven ? "md:items-end" : "md:items-start"}`}>
+            <span className="text-[#FFB6C1] text-[9px] font-black tracking-[0.4em] uppercase mb-3">
               {data.period === "PRESENT" ? "● Active" : data.period}
             </span>
-            <h3 className="text-[#001F3F] text-2xl font-serif italic">{data.title}</h3>
-            <span className="text-[10px] text-[#001F3F]/40 font-bold uppercase tracking-widest mt-1">
-              // {data.company}
+            <h3 className="text-[#001F3F] text-2xl md:text-3xl font-serif italic mb-1">{data.title}</h3>
+            <span className="text-[10px] text-[#001F3F] font-bold uppercase tracking-widest bg-[#fcfcfc] px-2 py-1 border border-[#f0f0f0]">
+              {data.company}
             </span>
           </div>
           
-          <p className="text-xs text-[#001F3F]/60 leading-relaxed font-light mb-8 italic">
+          <p className="text-[13px] text-[#001F3F] leading-relaxed font-light mb-6">
             {data.description}
           </p>
           
-          <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? "md:justify-end" : "md:justify-start"}`}>
+          <div className={`flex flex-wrap gap-2 ${isEven ? "md:justify-end" : "md:justify-start"}`}>
             {data.skills.map((s, i) => (
-              <span key={i} className="px-3 py-1 text-[8px] uppercase tracking-widest font-bold text-[#001F3F]/40 bg-[#f9f9f9] border border-[#f0f0f0]">
-                {s}
+              <span key={i} className="text-[9px] uppercase tracking-widest font-black text-[#FFB6C1]">
+                #{s.replace(/\s/g, '')}
               </span>
             ))}
           </div>
@@ -85,29 +89,36 @@ export default function Experience() {
   const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <section id="experience" className="w-full py-32 bg-white px-6 font-sans overflow-hidden">
-      {/* Section Header */}
-      <div className="max-w-7xl mx-auto mb-32 border-b border-[#f0f0f0] pb-16">
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-[#FFB6C1] text-[10px] tracking-[0.5em] font-bold uppercase">Deployment.History</span>
-          <div className="h-px w-12 bg-[#FFB6C1]" />
-        </div>
-        <h2 className="text-[#001F3F] font-serif text-5xl md:text-7xl italic leading-tight">
-          Professional <br /> Experience
-        </h2>
+    /* Increased lateral padding to pull content inward */
+    <section id="experience" className="w-full py-14 bg-white px-8 md:px-24 lg:px-40 font-sans overflow-hidden">
+      
+      {/* Tightened Section Header */}
+      <div className="max-w-5xl mx-auto mb-24 text-center">
+        <h2 className="text-[#001F3F] text-4xl md:text-4xl font-serif mb-4 tracking-tight uppercase">Work Experience</h2>
+        <div className="h-[1px] w-12 bg-[#FFB6C1] mx-auto mb-6"></div>
+        <p className="text-[#001F3F]/60 text-lg font-light max-w-2xl mx-auto">
+          Professional journey and key roles in tech, education, and impact
+        </p>
       </div>
 
-      <div ref={containerRef} className="relative max-w-7xl mx-auto">
-        {/* Timeline Line */}
+      <div ref={containerRef} className="relative max-w-5xl mx-auto">
+        {/* Timeline Line: Slightly thicker and colored for "Tight" feel */}
         <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[1px] bg-[#f0f0f0] transform -translate-x-1/2" />
         <motion.div 
-          className="absolute left-0 md:left-1/2 top-0 w-[1px] bg-[#FFB6C1] origin-top transform -translate-x-1/2" 
+          className="absolute left-0 md:left-1/2 top-0 w-[1px] bg-[#001F3F] origin-top transform -translate-x-1/2 z-0" 
           style={{ scaleY, bottom: 0 }} 
         />
         
         <div className="relative z-10">
-          {experiences.map((exp, index) => <ExperienceCard key={index} data={exp} index={index} />)}
+          {experiences.map((exp, index) => (
+            <ExperienceCard key={index} data={exp} index={index} />
+          ))}
         </div>
+      </div>
+
+      {/* Subtle Footer for the section */}
+      <div className="max-w-5xl mx-auto mt-20 text-center">
+        <div className="inline-block h-px w-24 bg-[#f0f0f0]" />
       </div>
     </section>
   );

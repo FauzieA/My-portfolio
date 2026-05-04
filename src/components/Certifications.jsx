@@ -41,7 +41,7 @@ const credentials = [
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="w-full py-32 bg-white px-6 font-sans border-t border-[#f0f0f0]">
+    <section id="certifications" className="w-full py-20 bg-white px-6 font-sans border-t border-[#f0f0f0]">
       <div className="max-w-7xl mx-auto">
         
         {/* --- HEADER: Consistent with Services/Portfolio --- */}

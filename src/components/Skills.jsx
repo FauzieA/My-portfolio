@@ -1,113 +1,70 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { 
-  FaPython, FaReact, FaGitAlt, FaNodeJs, FaFigma, FaAws, FaChartBar, FaCode 
-} from "react-icons/fa";
-import { 
-  SiJavascript, SiTailwindcss, SiNextdotjs, SiDjango, SiMysql, SiPandas, 
-  SiScikitlearn, SiTensorflow, SiOpencv, SiCplusplus, SiPhp 
-} from "react-icons/si";
 
 const skillCategories = [
   {
-    title: "Languages",
-    skills: [
-      { name: "Python", icon: FaPython },
-      { name: "JavaScript", icon: SiJavascript },
-      { name: "C / C++", icon: SiCplusplus },
-      { name: "SQL", icon: SiMysql }, 
-      { name: "PHP", icon: SiPhp },   
-    ],
+    title: "Data & Analysis",
+    skills: ["Python", "R", "SQL", "Machine Learning", "Data Visualization", "Pandas/NumPy"]
   },
   {
-    title: "Full-Stack Dev",
-    skills: [
-      { name: "React.js", icon: FaReact },
-      { name: "Next.js", icon: SiNextdotjs },
-      { name: "Node.js", icon: FaNodeJs },
-      { name: "Django", icon: SiDjango },
-      { name: "Tailwind", icon: SiTailwindcss },
-    ],
+    title: "Frontend Development",
+    skills: ["React.js", "Next.js", "Tailwind CSS", "Framer Motion", "JavaScript (ES6+)", "UI/UX Design"]
   },
   {
-    title: "Data Science & AI",
-    skills: [
-      { name: "TensorFlow", icon: SiTensorflow },
-      { name: "Scikit-Learn", icon: SiScikitlearn },
-      { name: "Pandas", icon: SiPandas },
-      { name: "OpenCV", icon: SiOpencv },
-    ],
+    title: "Tools & Systems",
+    skills: ["Git/GitHub", "Docker", "AWS", "WordPress", "Moodle LMS", "Linux/Bash"]
   },
   {
-    title: "Systems & Cloud",
-    skills: [
-      { name: "Git / GitHub", icon: FaGitAlt },
-      { name: "AWS", icon: FaAws },            
-      { name: "Power BI", icon: FaChartBar },
-      { name: "Figma", icon: FaFigma },
-    ],
-  },
+    title: "Soft Skills",
+    skills: ["Technical Writing", "Public Speaking", "Project Management", "Curriculum Design", "Mentorship"]
+  }
 ];
 
 export default function Skills() {
-    return (
-      <section id="skills" className="w-full py-32 bg-white px-6 font-sans">
-        <div className="max-w-7xl mx-auto">
-          
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8 border-b-2 border-[#001F3F] pb-16">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-[#FFB6C1] text-[10px] tracking-[0.5em] font-bold uppercase">System.Capability</span>
-                <div className="h-px w-12 bg-[#FFB6C1]" />
-              </div>
-              <h2 className="text-[#001F3F] font-serif text-5xl md:text-7xl italic leading-tight">
-                Technical <br /> Expertise
-              </h2>
+  return (
+    <section id="skills" className="w-full py-12 bg-white px-8 md:px-24 lg:px-40 font-sans overflow-hidden">
+      
+      {/* Tightened Header - Consistently aligned with Services/Portfolio */}
+      <div className="max-w-5xl mx-auto mb-24 text-center">
+        <h2 className="text-[#001F3F] text-4xl md:text-4xl font-serif mb-4 tracking-tight uppercase">Technical Skills</h2>
+        <div className="h-[1px] w-12 bg-[#FFB6C1] mx-auto mb-6"></div>
+        <p className="text-[#001F3F]/60 text-lg font-light max-w-2xl mx-auto">
+          Expertise across data science, backend systems, and modern web technologies
+        </p>
+      </div>
+
+      {/* Centered Technical Grid */}
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
+        {skillCategories.map((category, idx) => (
+          <motion.div 
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="border-t border-[#f0f0f0] pt-8"
+          >
+            {/* Category Title - High Contrast */}
+            <h3 className="text-[#001F3F] text-xs font-black uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+              <span className="w-2 h-2 bg-[#FFB6C1] rounded-full"></span>
+              {category.title}
+            </h3>
+
+            {/* Skills List - Dense and solid */}
+            <div className="flex flex-wrap gap-x-6 gap-y-4">
+              {category.skills.map((skill, i) => (
+                <div key={i} className="group relative">
+                  <span className="text-[14px] text-[#001F3F] font-light cursor-default hover:text-[#FFB6C1] transition-colors">
+                    {skill}
+                  </span>
+                  {/* Subtle underline that appears on hover */}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#FFB6C1] group-hover:w-full transition-all duration-300"></span>
+                </div>
+              ))}
             </div>
-            <p className="max-w-xs text-[11px] text-[#001F3F] leading-relaxed uppercase tracking-[0.2em] font-bold">
-              High-performance tools for enterprise-level deployment.
-            </p>
-          </div>
+          </motion.div>
+        ))}
+      </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[#f0f0f0] border border-[#f0f0f0]">
-            {skillCategories.map((category, idx) => (
-              <motion.div 
-                key={idx} 
-                initial={{ opacity: 0 }} 
-                whileInView={{ opacity: 1 }} 
-                viewport={{ once: true }}
-                className="bg-white p-12 group"
-              >
-                <div className="flex items-center justify-between mb-12">
-                  <h3 className="text-sm font-bold text-[#001F3F] uppercase tracking-[0.3em]">
-                    {category.title}
-                  </h3>
-                  <FaCode className="text-[#FFB6C1]" size={14} />
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-10 gap-x-6">
-                  {category.skills.map((skill, i) => (
-                    <div key={i} className="flex flex-col gap-4 group/skill">
-                      <div className="flex items-center gap-3">
-                        {/* ICON IS NOW SOLID NAVY */}
-                        <skill.icon className="text-[#001F3F] group-hover/skill:text-[#FFB6C1] transition-colors duration-300" size={20} />
-                        {/* TEXT IS NOW SOLID NAVY */}
-                        <span className="text-[10px] font-black text-[#001F3F] uppercase tracking-tighter">
-                          {skill.name}
-                        </span>
-                      </div>
-                      {/* BOLD PINK ACCENT LINE */}
-                      <div className="w-full h-[3px] bg-[#f0f0f0]">
-                        <div className="w-1/3 h-full bg-[#FFB6C1] group-hover/skill:w-full transition-all duration-500 ease-in-out" />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
+    </section>
+  );
 }

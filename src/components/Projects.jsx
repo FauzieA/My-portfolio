@@ -21,7 +21,7 @@ export default function PortfolioGrid() {
         
         {/* Title & Subtitle matching the screenshot style */}
         <div className="text-center mb-12">
-          <h2 className="text-[#001F3F] text-4xl md:text-5xl font-serif mb-4 tracking-tight uppercase">Portfolio</h2>
+          <h2 className="text-[#001F3F] text-4xl md:text-4xl font-serif mb-4 tracking-tight uppercase">Portfolio</h2>
           <p className="text-[#001F3F]/50 italic text-sm mb-10 font-serif">A glimpse of the projects I've been working on</p>
           
           {/* Filter Bar */}

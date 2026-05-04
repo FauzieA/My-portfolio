@@ -11,7 +11,6 @@ export default function LoadingScreen({ onComplete }) {
           clearInterval(timer);
           return 100;
         }
-        // Steady increments for a smooth experience
         const increment = Math.floor(Math.random() * 8) + 4;
         return Math.min(prev + increment, 100);
       });
@@ -24,66 +23,62 @@ export default function LoadingScreen({ onComplete }) {
     if (progress === 100) {
       const timeout = setTimeout(() => {
         onComplete();
-      }, 500);
+      }, 800); 
       return () => clearTimeout(timeout);
     }
   }, [progress, onComplete]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] bg-[#07131d] flex flex-col items-center justify-center font-mono text-[#C2A878]"
+      className="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center font-sans px-8 md:px-24 lg:px-40"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.6 } }}
+      exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
     >
-      {/* Background Subtle Grid - Matches Hero */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "radial-gradient(#C2A878 1px, transparent 1px)",
-            backgroundSize: "40px 40px"
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 flex flex-col items-center">
+      <div className="relative z-10 flex flex-col items-center w-full max-w-5xl">
         
-        {/* --- THE DIAMOND NODE --- */}
-        <div className="relative w-20 h-20 mb-10">
-          {/* Animated Diamond Frame */}
+        {/* --- MINIMAL INDICATOR --- */}
+        <div className="relative w-16 h-16 mb-12">
+          {/* Rotating Ring - Very thin, very light */}
           <motion.div 
-            className="absolute inset-0 border-2 border-[#C2A878] rotate-45"
-            animate={{ 
-              scale: [1, 1.1, 1], 
-              opacity: [0.4, 1, 0.4],
-              boxShadow: ["0 0 0px #C2A878", "0 0 20px #C2A878", "0 0 0px #C2A878"] 
-            }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0 border-[0.5px] border-[#001F3F]/10 rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           />
-          {/* Percentage Counter */}
-          <div className="absolute inset-0 flex items-center justify-center font-bold text-xl tracking-tighter">
-            {progress}%
+          {/* Percentage Counter - Serif Italic for elegance */}
+          <div className="absolute inset-0 flex items-center justify-center font-serif italic text-2xl text-[#001F3F]">
+            {progress}
           </div>
         </div>
 
-        {/* --- MINIMAL PROGRESS LINE --- */}
-        <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden mb-6">
-          <motion.div
-            className="absolute top-0 left-0 h-full bg-[#C2A878]"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-          />
-        </div>
+        {/* --- PROGRESS BAR --- */}
+        <div className="w-full max-w-[180px] text-center">
+          {/* Razor Thin Progress Line */}
+          <div className="w-full h-[1px] bg-[#f5f5f5] relative overflow-hidden mb-4">
+            <motion.div
+              className="absolute top-0 left-0 h-full bg-[#FFB6C1]"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ ease: "easeOut" }}
+            />
+          </div>
 
-        {/* --- STATUS TEXT --- */}
-        <div className="text-[10px] uppercase tracking-[0.5em] text-[#C2A878] opacity-80 animate-pulse">
-           {progress < 100 ? "Initializing" : "Ready"}
+          {/* Minimal Status Text - Swapped to "Access" for a less techy feel */}
+          <div className="flex justify-between items-center text-[8px] font-black uppercase tracking-[0.5em] text-[#001F3F]">
+             <span>
+               {progress < 100 ? "Portfolio.Access" : "Welcome"}
+             </span>
+             <span className="text-[#FFB6C1]">/ 100</span>
+          </div>
         </div>
       </div>
 
-      {/* --- FOOTER NAME --- */}
-      <div className="absolute bottom-10 text-[9px] uppercase tracking-[0.6em] opacity-30">
-        Fauziyya Abdullahi Ahmed
+      {/* --- FOOTER NAME (Editorial Spine) --- */}
+      <div className="absolute bottom-12 flex flex-col items-center">
+        {/* The Vertical Spine - Consistent with your Timeline sections */}
+        <div className="h-10 w-[1px] bg-[#FFB6C1] mb-6" />
+        <div className="text-[10px] uppercase tracking-[0.6em] text-[#001F3F] font-bold">
+          Fauziyya Ahmed
+        </div>
       </div>
     </motion.div>
   );
