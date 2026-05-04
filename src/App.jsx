@@ -5,63 +5,43 @@ import { ThemeProvider } from "./context/ThemeContext";
 
 // Section Components
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Skills from "./components/Skills";
-import Certifications from "./components/Certifications";
-import Experience from "./components/Experience";
-import Contact from "./components/Contact";
-
-// Page Components
+import Home from "./pages/Home";
 import ProjectDetails from "./components/ProjectDetails";
 import LoadingScreen from "./components/LoadingScreen";
 
-function App() {
+// We create a wrapper so we can use the Router
+function AppContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <ThemeProvider>
-      <>
-        {/* 1. THE LOADING SCREEN */}
-        <AnimatePresence mode="wait">
-          {isLoading && (
-            <LoadingScreen 
-              key="loader" 
-              onComplete={() => setIsLoading(false)} 
-            />
-          )}
-        </AnimatePresence>
-
-        {/* 2. THE MAIN APP */}
-        {!isLoading && (
-          <Router>
-            <Routes>
-              {/* MAIN HOME ROUTE */}
-              <Route
-                path="/"
-                element={
-                  <>
-                    <Navbar />
-                    <main>
-                      <Hero />
-                      <About />
-                      <Projects />
-                      <Skills />
-                      <Certifications />
-                      <Experience />
-                      <Contact />
-                    </main>
-                  </>
-                }
-              />
-
-              {/* PROJECT DETAIL ROUTE */}
-              <Route path="/projects/:projectId" element={<ProjectDetails />} />
-            </Routes>
-          </Router>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen 
+            key="loader" 
+            onComplete={() => setIsLoading(false)} 
+          />
         )}
-      </>
+      </AnimatePresence>
+
+      {!isLoading && (
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects/:projectId" element={<ProjectDetails />} />
+          </Routes>
+        </Router>
+      )}
+    </>
+  );
+}
+
+// Final App component wrapped in Provider
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
     </ThemeProvider>
   );
 }
