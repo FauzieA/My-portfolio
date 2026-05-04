@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
 export const ThemeProvider = ({ children }) => {
-  // Always use dark mode
+  // Light mode (white background)
   useEffect(() => {
-    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('dark');
   }, []);
 
   return <>{children}</>;

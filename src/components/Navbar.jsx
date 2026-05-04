@@ -10,7 +10,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = ["Intro", "Services", "Portfolio", "Experience", "Contact"];
+  const navLinks = ["Intro", "Services", "Portfolio", "Experience", "Skills", "Contact"];
+
+  const handleNavClick = (link) => {
+    const sectionId = link.toLowerCase();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className={`fixed z-[100] transition-all duration-700 ease-in-out ${
@@ -37,15 +45,15 @@ export default function Navbar() {
           {!isScrolled && <div className="h-12 w-[1px] bg-[#001F3F]/10 mb-4" />}
           
           {navLinks.map((link) => (
-            <a 
+            <button 
               key={link} 
-              href={`#${link.toLowerCase()}`}
-              className={`text-[9px] uppercase tracking-[0.4em] font-bold transition-all hover:text-[#FFB6C1] ${
+              onClick={() => handleNavClick(link)}
+              className={`text-[9px] uppercase tracking-[0.4em] font-bold transition-all hover:text-[#FFB6C1] cursor-pointer ${
                 isScrolled ? "text-[#001F3F]/60" : "text-[#001F3F]/30 [writing-mode:vertical-lr] rotate-180"
               }`}
             >
               {link}
-            </a>
+            </button>
           ))}
 
           {!isScrolled && <div className="h-12 w-[1px] bg-[#001F3F]/10 mt-4" />}

@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-white px-6 md:px-20 lg:px-32 overflow-visible selection:bg-[#FFB6C1] selection:text-[#001F3F]">
+    <section id="intro" className="relative w-full min-h-screen flex items-center justify-center bg-white px-6 md:px-20 lg:px-32 overflow-visible selection:bg-[#FFB6C1] selection:text-[#001F3F]">
       
       {/* LEFT ACCENT: Thin vertical anchor */}
       <div className="absolute left-0 top-0 w-1 md:w-2 h-full bg-[#001F3F] z-20" />

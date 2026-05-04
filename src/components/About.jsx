@@ -53,7 +53,7 @@ export default function Services() {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <section className="py-20 bg-white relative px-8 md:px-24 lg:px-40 font-sans">
+    <section id="services" className="py-20 bg-white relative px-8 md:px-24 lg:px-40 font-sans">
       
       {/* Centered Header */}
       <div className="max-w-4xl mx-auto mb-32 text-center">

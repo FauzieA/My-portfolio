@@ -9,7 +9,7 @@ import Certifications from '../components/Certifications';
 
 export default function Home() {
   return (
-    <main className="relative transition-colors duration-700 overflow-x-hidden bg-[#07131d]">
+    <main className="relative transition-colors duration-700 overflow-x-hidden bg-white">
       <Hero />
       <About />
       <Projects />
