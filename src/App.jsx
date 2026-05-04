@@ -6,7 +6,6 @@ import { ThemeProvider } from "./context/ThemeContext";
 // Section Components
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import ProjectDetails from "./components/ProjectDetails";
 import LoadingScreen from "./components/LoadingScreen";
 
 // We create a wrapper so we can use the Router
@@ -29,7 +28,6 @@ function AppContent() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/projects/:projectId" element={<ProjectDetails />} />
           </Routes>
         </Router>
       )}
