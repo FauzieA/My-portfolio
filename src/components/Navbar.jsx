@@ -14,10 +14,15 @@ export default function Navbar() {
 
   const handleNavClick = (link) => {
     const sectionId = link.toLowerCase();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Use hash navigation for GitHub Pages compatibility
+    window.location.hash = sectionId;
+    // Ensure smooth scroll after hash changes
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   return (
