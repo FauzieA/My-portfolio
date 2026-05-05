@@ -24,12 +24,15 @@ function AppContent() {
       </AnimatePresence>
 
       {!isLoading && (
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </Router>
+        // App.jsx
+<Router>
+  <Navbar />
+  <Routes>
+    <Route path="/" element={<Home />} />
+    {/* This catches any other path and sends it home */}
+    <Route path="*" element={<Home />} />
+  </Routes>
+</Router>
       )}
     </>
   );

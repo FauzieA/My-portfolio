@@ -5,8 +5,8 @@
 
 @layer base {
   body {
-    background-color: #07131d;
-    color: #C9CCD3;
+    background-color: #FFFFFF;
+    color: #001F3F;            
     @apply antialiased;
   }
 }
