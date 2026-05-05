@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { ThemeProvider } from "./context/ThemeContext";
 
 // Section Components
 import Navbar from "./components/Navbar";
@@ -38,13 +37,9 @@ function AppContent() {
   );
 }
 
-// Final App component wrapped in Provider
+// Final App component
 function App() {
-  return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
-  );
+  return <AppContent />;
 }
 
 export default App;

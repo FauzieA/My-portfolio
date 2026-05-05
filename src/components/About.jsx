@@ -52,19 +52,22 @@ const services = [
 export default function Services() {
   const [selectedId, setSelectedId] = useState(null);
 
+  const activeService = services.find(s => s.id === selectedId);
+
   return (
-    <section id="services" className="py-20 bg-white relative px-8 md:px-24 lg:px-40 font-sans">
+    /* Bone White Background and Subtle Border */
+    <section id="services" className="py-32 bg-[#F9F9F9] relative px-8 md:px-24 lg:px-40 font-sans border-y border-[#EDEDED]">
       
       {/* Centered Header */}
       <div className="max-w-4xl mx-auto mb-32 text-center">
         <h2 className="text-[#001F3F] text-4xl md:text-4xl font-serif mb-4 tracking-tight uppercase">Services</h2>
         <div className="h-[1px] w-12 bg-[#FFB6C1] mx-auto mb-6"></div>
-        <p className="text-[#001F3F]/60 text-lg font-light max-w-xl mx-auto">
+        <p className="text-[#001F3F]/60 text-lg font-light max-w-xl mx-auto italic">
           Technical strategy meets educational clarity.
         </p>
       </div>
 
-      {/* Service Grid - Pure Whitespace */}
+      {/* Service Grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
         {services.map((service) => (
           <div 
@@ -72,28 +75,25 @@ export default function Services() {
             className="flex flex-col items-center text-center group cursor-pointer"
             onClick={() => setSelectedId(service.id)}
           >
-            {/* Smaller, Elegant Icon Circle */}
+            {/* Background Morph Wrapper */}
             <motion.div 
-              layoutId={`icon-bg-${service.id}`}
-              className="w-20 h-20 rounded-full border border-[#FFB6C1] flex items-center justify-center mb-8 group-hover:bg-[#FFB6C1] transition-all duration-300"
+              layoutId={`service-container-${service.id}`}
+              className="w-20 h-20 rounded-full border border-[#FFB6C1] flex items-center justify-center mb-8 group-hover:bg-[#FFB6C1] transition-all duration-300 shadow-sm bg-white"
             >
+              {/* Content isolated from morph to prevent distortion */}
               <div className="text-xl text-[#FFB6C1] group-hover:text-white transition-colors">
                 {service.icon}
               </div>
             </motion.div>
             
-            <motion.h3 
-              layoutId={`title-${service.id}`}
-              className="text-[#001F3F] text-xl font-serif font-bold mb-4"
-            >
+            <h3 className="text-[#001F3F] text-xl font-serif font-bold mb-4">
               {service.title}
-            </motion.h3>
+            </h3>
             
             <p className="text-[14px] text-[#001F3F]/70 leading-relaxed font-light mb-6">
               {service.tagline}
             </p>
 
-            {/* Replaced + with a Minimalist Underline Link */}
             <span className="text-[10px] uppercase tracking-[0.3em] font-black text-[#FFB6C1] border-b border-transparent group-hover:border-[#FFB6C1] transition-all">
               View Alignment
             </span>
@@ -101,7 +101,7 @@ export default function Services() {
         ))}
       </div>
 
-      {/* Fixed Click-to-Expand Logic */}
+      {/* Modal Logic */}
       <AnimatePresence>
         {selectedId && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
@@ -114,54 +114,59 @@ export default function Services() {
               className="absolute inset-0 bg-[#001F3F]/10 backdrop-blur-md"
             />
 
-            {/* Modal Content */}
+            {/* Modal Container Morph */}
             <motion.div
-              layoutId={`icon-bg-${selectedId}`}
+              layoutId={`service-container-${selectedId}`}
               className="bg-white w-full max-w-4xl max-h-[85vh] overflow-y-auto relative z-10 shadow-2xl p-10 md:p-20 rounded-sm"
             >
-              <button 
-                onClick={() => setSelectedId(null)} 
-                className="absolute top-10 right-10 text-[#001F3F]/30 hover:text-[#001F3F]"
+              {/* Internal Content Fade-in */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2, delay: 0.1 }}
               >
-                <FaTimes size={20} />
-              </button>
+                <button 
+                  onClick={() => setSelectedId(null)} 
+                  className="absolute top-10 right-10 text-[#001F3F]/30 hover:text-[#FFB6C1]"
+                >
+                  <FaTimes size={20} />
+                </button>
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                <div className="lg:col-span-5">
-                  <motion.h2 
-                    layoutId={`title-${selectedId}`}
-                    className="text-4xl font-serif text-[#001F3F] mb-6 italic"
-                  >
-                    {services.find(s => s.id === selectedId).title}
-                  </motion.h2>
-                  <p className="text-[#001F3F]/60 text-[15px] font-light leading-relaxed">
-                    {services.find(s => s.id === selectedId).tagline}
-                  </p>
-                </div>
-
-                <div className="lg:col-span-7 space-y-12">
-                  <div className="space-y-6">
-                    <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-[#FFB6C1]">The Strategy</h4>
-                    {services.find(s => s.id === selectedId).alignment.map((item, i) => (
-                      <p key={i} className="text-[14px] text-[#001F3F] border-l border-[#FFB6C1] pl-4 font-light">
-                        {item}
-                      </p>
-                    ))}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                  <div className="lg:col-span-5">
+                    <h2 className="text-4xl font-serif text-[#001F3F] mb-6 italic">
+                      {activeService.title}
+                    </h2>
+                    <p className="text-[#001F3F]/60 text-[15px] font-light leading-relaxed">
+                      {activeService.tagline}
+                    </p>
                   </div>
 
-                  <div className="space-y-6">
-                    <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-[#FFB6C1]">Key Offerings</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                      {services.find(s => s.id === selectedId).offerings.map((offering, i) => (
-                        <div key={i}>
-                          <h5 className="font-bold text-[13px] text-[#001F3F] mb-1">{offering.sub}</h5>
-                          <p className="text-[12px] text-[#001F3F]/50">{offering.text}</p>
-                        </div>
+                  <div className="lg:col-span-7 space-y-12">
+                    <div className="space-y-6">
+                      <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-[#FFB6C1]">The Strategy</h4>
+                      {activeService.alignment.map((item, i) => (
+                        <p key={i} className="text-[14px] text-[#001F3F] border-l border-[#FFB6C1] pl-4 font-light">
+                          {item}
+                        </p>
                       ))}
+                    </div>
+
+                    <div className="space-y-6">
+                      <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-[#FFB6C1]">Key Offerings</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        {activeService.offerings.map((offering, i) => (
+                          <div key={i}>
+                            <h5 className="font-bold text-[13px] text-[#001F3F] mb-1">{offering.sub}</h5>
+                            <p className="text-[12px] text-[#001F3F]/50">{offering.text}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         )}

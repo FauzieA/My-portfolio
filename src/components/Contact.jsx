@@ -30,21 +30,22 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="w-full py-32 bg-white px-8 md:px-24 lg:px-40 font-sans border-t border-[#f0f0f0]">
+    /* Background changed to Bone White (#F9F9F9) and border adjusted */
+    <section id="contact" className="w-full py-32 bg-[#F9F9F9] px-8 md:px-24 lg:px-40 font-sans border-t border-[#EDEDED]">
       <div className="max-w-5xl mx-auto">
         
-        {/* --- YOUR PREVIOUS HEADING STYLE (Retained) --- */}
+        {/* --- HEADING STYLE --- */}
         <div className="text-center mb-24">
           <h2 className="text-[#001F3F] text-4xl md:text-5xl font-serif mb-4 tracking-tight uppercase">Get In Touch</h2>
           <div className="h-[1px] w-12 bg-[#FFB6C1] mx-auto mb-6"></div>
-          <p className="text-[#001F3F] text-[15px] font-light max-w-xl mx-auto italic">
+          <p className="text-[#001F3F]/60 text-[15px] font-light max-w-xl mx-auto italic">
             Currently available for technical collaborations and professional opportunities.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
-          {/* --- LEFT SIDE: Tightened Scale --- */}
+          {/* --- LEFT SIDE --- */}
           <div className="lg:col-span-5 space-y-12">
             <div>
               <h3 className="text-[#001F3F] text-[11px] font-black tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
@@ -76,7 +77,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* --- RIGHT SIDE: Tightened Inquiry Form --- */}
+          {/* --- RIGHT SIDE: Inquiry Form --- */}
           <div className="lg:col-span-7">
             {status === "success" ? (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-10">
@@ -97,8 +98,9 @@ export default function Contact() {
                         onChange={handleChange} 
                         required 
                         rows={3}
-                        className="w-full bg-transparent border-b border-[#f0f0f0] py-2 text-[14px] text-[#001F3F] font-light focus:outline-none focus:border-[#001F3F] transition-all resize-none placeholder:text-[#001F3F]/10" 
-                        placeholder={`...`}
+                        /* Border color adjusted to contrast with bone white */
+                        className="w-full bg-transparent border-b border-[#001F3F]/10 py-2 text-[14px] text-[#001F3F] font-light focus:outline-none focus:border-[#001F3F] transition-all resize-none placeholder:text-[#001F3F]/20" 
+                        placeholder={`Your project details...`}
                       />
                     ) : (
                       <input 
@@ -106,8 +108,8 @@ export default function Contact() {
                         type={field === 'email' ? 'email' : 'text'} 
                         onChange={handleChange} 
                         required 
-                        className="w-full bg-transparent border-b border-[#f0f0f0] py-2 text-[14px] text-[#001F3F] font-light focus:outline-none focus:border-[#001F3F] transition-all placeholder:text-[#001F3F]/10" 
-                        placeholder={`...`}
+                        className="w-full bg-transparent border-b border-[#001F3F]/10 py-2 text-[14px] text-[#001F3F] font-light focus:outline-none focus:border-[#001F3F] transition-all placeholder:text-[#001F3F]/20" 
+                        placeholder={`Your ${field}...`}
                       />
                     )}
                   </div>
