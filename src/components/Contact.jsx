@@ -39,8 +39,8 @@ export default function Contact() {
           <h2 className="text-[#001F3F] text-4xl md:text-5xl font-serif mb-4 tracking-tight uppercase">Get In Touch</h2>
           <div className="h-[1px] w-12 bg-[#FFB6C1] mx-auto mb-6"></div>
           <p className="text-[#001F3F]/60 text-[15px] font-light max-w-xl mx-auto italic">
-            Currently available for technical collaborations and professional opportunities.
-          </p>
+            Got something interesting in mind? Whether it's a project, idea, or workshop, I'm always up for building something meaningful.
+            </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -50,7 +50,7 @@ export default function Contact() {
             <div>
               <h3 className="text-[#001F3F] text-[11px] font-black tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-[#FFB6C1] rounded-full"></span>
-                Direct
+                Email
               </h3>
               <a href="mailto:fauxieahmed22@gmail.com" className="group flex items-center gap-4">
                 <span className="text-[13px] font-bold text-[#001F3F] border-b border-[#FFB6C1] pb-1 group-hover:text-[#FFB6C1] transition-all">
@@ -62,7 +62,7 @@ export default function Contact() {
             <div>
               <h3 className="text-[#001F3F] text-[11px] font-black tracking-[0.3em] uppercase mb-6 flex items-center gap-3">
                 <span className="w-1.5 h-1.5 bg-[#001F3F] rounded-full"></span>
-                Digital
+                Elsewhere
               </h3>
               <div className="flex gap-6">
                 <a href="https://linkedin.com/in/fauziyya-ahmed" target="_blank" rel="noreferrer" 
@@ -82,8 +82,8 @@ export default function Contact() {
             {status === "success" ? (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="py-10">
                 <FaCheckCircle className="text-[#FFB6C1] mb-4" size={30} />
-                <h3 className="text-[#001F3F] font-serif text-2xl italic">Inquiry Received.</h3>
-                <p className="text-[#001F3F] text-xs mt-2 uppercase tracking-widest font-bold">Talk soon.</p>
+                <h3 className="text-[#001F3F] font-serif text-2xl italic">Message received.</h3>
+                <p className="text-[#001F3F] text-xs mt-2 uppercase tracking-widest font-bold">I'll get back to you soon.</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -100,7 +100,7 @@ export default function Contact() {
                         rows={3}
                         /* Border color adjusted to contrast with bone white */
                         className="w-full bg-transparent border-b border-[#001F3F]/10 py-2 text-[14px] text-[#001F3F] font-light focus:outline-none focus:border-[#001F3F] transition-all resize-none placeholder:text-[#001F3F]/20" 
-                        placeholder={`Your project details...`}
+                        placeholder={`What are you working on?`}
                       />
                     ) : (
                       <input 

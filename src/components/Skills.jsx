@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const skillCategories = [
   {
     title: "Data & Analysis",
-    skills: ["Python", "R", "SQL", "Machine Learning", "Data Visualization", "Pandas/NumPy"]
+    skills: ["Python", "SQL", "Machine Learning", "Data Visualization", "Pandas/NumPy"]
   },
   {
     title: "Frontend Development",
@@ -15,7 +15,7 @@ const skillCategories = [
     skills: ["Git/GitHub", "Docker", "AWS", "WordPress", "Moodle LMS", "Linux/Bash"]
   },
   {
-    title: "Soft Skills",
+    title: "Communication & Leadership",
     skills: ["Technical Writing", "Public Speaking", "Project Management", "Curriculum Design", "Mentorship"]
   }
 ];
@@ -29,7 +29,7 @@ export default function Skills() {
         <h2 className="text-[#001F3F] text-4xl md:text-4xl font-serif mb-4 tracking-tight uppercase">Technical Skills</h2>
         <div className="h-[1px] w-12 bg-[#FFB6C1] mx-auto mb-6"></div>
         <p className="text-[#001F3F]/60 text-lg font-light max-w-2xl mx-auto">
-          Expertise across data science, backend systems, and modern web technologies
+          Focused on data-driven solutions, modern web interfaces, and practical machine learning.
         </p>
       </div>
 

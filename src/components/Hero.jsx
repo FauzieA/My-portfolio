@@ -21,7 +21,7 @@ export default function Hero() {
             {/* Tagline with Pink Accent */}
             <div className="mb-6 flex items-center gap-4">
               <span className="text-[#FFB6C1] text-[10px] tracking-[0.5em] font-black uppercase">
-                Systems Architecture
+                Data, Web & AI Solutions
               </span>
               <div className="h-[1px] w-12 bg-[#FFB6C1]/30" />
             </div>
@@ -36,9 +36,9 @@ export default function Hero() {
             <div className="flex items-start gap-8 max-w-xl">
               <div className="h-16 w-[2px] bg-[#FFB6C1] shrink-0 mt-2" />
               <p className="text-[14px] md:text-[16px] leading-[1.8] text-[#001F3F]/60 font-light">
-                Empowering the next generation through <span className="text-[#001F3F] font-medium uppercase tracking-tighter">structured mentorship</span> for 400+ technologists. 
-                Bridging the gap between complex <span className="italic">machine learning systems</span> and actionable tech education.
-              </p>
+                Helping individuals and organizations turn data into 
+                insight, ideas into products, and learners into confident technologists.
+                </p>
             </div>
           </motion.div>
         </div>

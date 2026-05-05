@@ -26,7 +26,7 @@ export default function Footer() {
               <span className="text-[#FFB6C1] non-italic font-sans font-black uppercase tracking-tighter">remarkable.</span>
             </h2>
             <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-bold">
-              Technical Strategy — UI/UX Design — Data Solutions
+              DATA • WEB • AI • EDUCATION
             </p>
           </div>
 

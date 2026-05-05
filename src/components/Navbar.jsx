@@ -72,10 +72,7 @@ export default function Navbar() {
               className={`text-[9px] uppercase tracking-[0.4em] font-bold transition-colors hover:text-[#FFB6C1] cursor-pointer whitespace-nowrap flex items-center justify-center ${
                 isScrolled 
                   ? "text-[#001F3F]/60 rotate-0" 
-                  /* 
-                     Fixed h-16 and w-12 ensures the link has enough physical 
-                     space to rotate without hitting the next one.
-                  */
+                
                   : "text-[#001F3F]/30 -rotate-90 h-24 w-18"
               }`}
             >
